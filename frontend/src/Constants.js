@@ -6,8 +6,8 @@ const production = {
 
 const local = {
     url: {
-        LOCAL_URL: 'http://localhost:8080'
+        HEROKU_URL: 'http://localhost:8080'
     }
 }
 
-export const config = process.env.NODE_ENV === 'developpement' ? local : production;
+export const config = process.env.NODE_ENV === 'development' ? local : production;
