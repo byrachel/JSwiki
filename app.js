@@ -15,7 +15,9 @@ var dotenv = require('dotenv').config();
 var MongoStore = require('connect-mongo')(session);
 
 /* Import middlewares */
-var cors = require('./middlewares/cors');
+if(process.env.NODE_ENV === 'development') {
+    var cors = require('./middlewares/cors');
+}
 
 /* Import routes */
 const stuffRoutes = require('./routes/stuff');
