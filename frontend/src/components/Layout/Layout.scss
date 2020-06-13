@@ -1,0 +1,61 @@
+@import '../../App.scss';
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    // grid-template-rows: ;
+    gap: 10px 10px;
+    grid-template-areas: "logo main-menu login-button";
+    border-bottom: solid 1px lighten($color: $grey, $amount: 40);
+
+  }
+
+.logo {
+    grid-area: logo;
+}
+
+.main-menu {
+    grid-area: main-menu;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.login-button {
+    grid-area: login-button;
+    margin-top: 1rem;
+
+}
+
+
+#logo {
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    color: $black;
+    display: flex;
+    justify-content: flex-start;
+    margin: 1rem;
+}
+
+.button-icon {
+    width: 24px;
+    height: auto;
+    padding-right: 2px;
+}
+
+.nav-link {
+    color: $blue;
+    letter-spacing: 2px;
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+
+.nav-link:hover {
+    color: $black;
+}
+
+.nav-icon {
+    width: 28px;
+    height: auto;
+    padding-right: 10px;
+}

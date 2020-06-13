@@ -1,0 +1,88 @@
+@import '../App.scss';
+
+.search-input {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    .search-input-icon {
+        width: 30px;
+        height: auto;
+        margin: 0 1rem;
+    }
+}
+
+.custom-table {
+    color: $grey;
+    font-family: $family-primary;
+    width: 100%;
+
+    th {
+        padding: 1rem;
+        border-bottom: solid 5px $grey;
+        text-align: left;
+    }
+
+    td {
+        padding: .8rem;
+        border-bottom: solid 2px $grey;
+    }
+    tr:hover {
+        background-color: lighten($color: $grey, $amount: 40);
+    }
+
+}
+
+
+.table-pagination {
+
+    span {
+        color: $grey;
+        font-size: 1.1rem;
+        font-family: $family-primary;
+        padding: 0 .5rem;
+    }
+
+    input[type=number] {
+        width: 100%;
+        padding: .5rem;
+        margin: 1rem .2rem;
+        display: inline-block;
+        border: 1px solid lighten($color: $grey, $amount: 50%);
+        border-radius: 7px;
+        box-sizing: border-box;
+        // background: $light-color;
+        font-family: $family-primary;
+        font-size: 1rem;
+        color: $grey;
+      }
+      
+      input[type=number]:focus {
+        outline:0;
+        border: 1px solid $grey;
+      }
+
+      .table-button {
+        // background: $light-color;
+        color: $grey;
+        font-family: $family-primary;
+        font-size: 1.2rem;
+        border-radius: 7px;
+        border: solid 1px lighten($color: $grey, $amount: 40);
+        text-align: center;
+        text-decoration: none;
+        padding: .5rem .7rem;
+        margin: 1rem .2rem;
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
+      
+    .table-button:hover {
+        background-color: $grey;
+        border: solid 1px $grey;
+    }
+      
+    .table-button:focus {
+        outline:0;
+    }
+}

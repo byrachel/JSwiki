@@ -1,0 +1,431 @@
+@import '~react-bulma-components/src/index.sass';
+@import './_variables.sass';
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
+
+h1, h2, h3, p {
+  font-family: $family-primary;
+}
+
+h1 {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-top: 3rem;
+}
+
+h2 {
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+  font-weight: 700;
+  // padding: .5rem 0;
+}
+
+h4 {
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  padding: .5rem 0;
+}
+
+label {
+  font-size: .9rem;
+  font-family: $family-primary;
+  color: $grey;
+}
+
+.regular-list {
+  font-size: 1rem;
+  font-family: $family-primary;
+  color: $grey;
+  cursor: pointer;
+  line-height: 2rem;
+}
+
+.regular-list:hover {
+  color: $red;
+}
+
+.link {
+  font-family: $family-primary;
+  font-size: .9rem;
+  cursor: pointer;
+  color: red;
+}
+
+.link:hover {
+  color: $grey;
+}
+
+.white {
+  color: $white;
+}
+
+.separator {
+  width: 30%;
+  border-bottom: solid 1px $grey;
+  margin-bottom: 1.5rem;
+}
+
+.separator-centered {
+  width: 30%;
+  border-bottom: solid 1px $grey;
+  margin: 0 auto;
+  padding-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.grey-separator {
+  width: 90%;
+  border-bottom: solid 1px lighten($color: $grey, $amount: 30);
+  margin: 0 auto;
+}
+
+.meta-icon {
+  width: 1.1rem;
+  height: auto;
+  color: $red;
+  margin: 0;
+  padding: 0;
+}
+
+.meta-maj {
+  color: $grey;
+  font-size: .8rem;
+  font-style: italic;
+  margin: 0 .75rem;
+}
+
+.like-icon {
+  width: 1.5rem;
+  height: auto;
+  color: $red;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.like-icon:hover {
+  color: $blue;
+}
+
+.meta-like-icon {
+  width: 1.1rem;
+  height: auto;
+  color: $grey;
+  padding: 0;
+  cursor: pointer;
+  margin: 0 .5rem;
+}
+
+.meta-like-icon:hover {
+  color: $red;
+}
+
+.vertical-center {
+  vertical-align: middle;
+}
+
+.fullwidth {
+  background-color: #e8eefd;
+  padding: 4rem;
+  margin: 2rem 0;
+  p {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    line-height: 2.1rem;
+  }
+}
+
+.blocs {
+  margin-top: 3rem;
+  border: solid 1px $red;
+  padding: 1rem;
+
+  ol {
+    margin-left: 2rem;
+  }
+
+  .red-square {
+    background-color: $red;
+    h2 {
+      font-size: 1.2rem;
+      writing-mode: vertical-rl;
+      text-orientation: sideways-right;
+      transform: rotate(180deg);
+      letter-spacing: 2px;
+      text-align: center;
+    }
+  }
+}
+
+p {
+  font-size: 1.2rem;
+  font-size: 1rem;
+  line-height: 1.8rem;
+}
+
+.slogan {
+  color: $grey;
+  margin-bottom: 1rem;
+  padding: 0;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
+
+.meta {
+  vertical-align: center;
+  font-size: .85rem;
+  color: lighten($color: $grey, $amount: 10);
+}
+
+.meta-button {
+  vertical-align: center;
+  font-size: .85rem;
+  color: $grey;
+}
+
+.meta-info {
+  font-size: .8rem;
+  color: lighten($color: $grey, $amount: 35);
+  margin-top: -.5rem;
+  line-height: .4rem;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ressource-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.card {
+  border: solid 1px lighten($color: $black, $amount: 65);
+  border-radius: 5px;
+  margin: 1rem;
+  padding: 1rem;
+
+  h2 {
+    margin-bottom: 1.5rem;
+    padding: 0;
+    letter-spacing: .5px;
+    color: $black;
+    font-size: 1.4rem;
+  }
+  p {
+    margin-bottom: 1rem;
+    color: $black;
+  }
+}
+
+.card-details {
+  border: solid 1px lighten($color: $black, $amount: 90);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  margin: 1rem;
+  padding: 2rem;
+
+  h2 {
+    margin-bottom: 1.8rem;
+    padding: 0;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: $black;
+    font-size: 1.4rem;
+  }
+  p {
+    margin-bottom: 1rem;
+    color: $black;
+  }
+}
+
+.light-card {
+  margin: 3rem 1rem;
+
+}
+
+.heading-ressource {
+  margin: 0;
+  padding-bottom: 1rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.framework-category-icon {
+  color: $red;
+  width: 30px;
+  height: auto;
+  margin-right: .2rem;
+
+}
+
+.library-category-icon {
+  color: $blue;
+  width: 20px;
+  height: auto;
+  margin-right: .2rem;
+}
+
+.software-category-icon {
+  color: $green;
+  width: 20px;
+  height: auto;
+  margin-right: .2rem;
+
+}
+
+.component-category-icon {
+  color: $purple;
+  width: 20px;
+  height: auto;
+  margin-right: .2rem;
+}
+
+.other-category-icon {
+  color: $yellow;
+  width: 20px;
+  height: auto;
+  margin-right: .2rem;
+}
+
+.illustration {
+  width: 18rem;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.home-img {
+  max-width: 50rem;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.buttons-sidebar {
+
+  .button {
+    margin-right: .5rem;
+    letter-spacing: 1px;
+    padding: 0 1.2rem;
+
+  }
+
+}
+
+.category-nav-icon {
+  width: 1rem;
+  height: auto;
+  margin-right: .2rem;
+}
+
+// FORM
+
+.text-input {
+  width: 100%;
+  padding: .5rem;
+  margin: 1rem 0;
+  display: inline-block;
+  border-radius: 50px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  border: solid 1px lighten($color: $grey, $amount: 30);
+}
+
+.text-input:focus {
+  outline:0;
+  border: solid 1px $grey;
+}
+
+
+input[type=text], input[type=email], input[type=password], select {
+  width: 100%;
+  padding: .5rem;
+  margin: 0 0 1rem 0;
+  display: inline-block;
+  border: 1px solid lighten($color: $grey, $amount: 20);
+  box-sizing: border-box;
+  font-size: .9rem;
+  color: $grey;
+  font-family: $family-primary;
+}
+
+input[type=text]:focus, input[type=email]:focus, input[type=password]:focus, select:focus, textarea:focus {
+  outline:0;
+  background-color: lighten($color: $grey, $amount: 45);
+  border: 1px solid $blue;
+}
+
+textarea {
+  font-size: 1rem;
+  padding: .5rem;
+  margin: 1rem 0;
+  line-height: 1.7;
+  border: 1px solid lighten($color: $grey, $amount: 20);
+  width: 100%;
+  font-size: .9rem;
+  color: $grey;
+  font-family: $family-primary;
+}
+
+// MODAL
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.dialog {
+  background: white;
+  border-radius: 5px;
+  padding: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 25rem;
+  height: auto;
+  }
+
+.close-modal {
+  float: right;
+  background-color: $white;
+  font-weight: 500;
+  padding: 2px;
+  margin-top: -1.25rem;
+  margin-right: -1rem;
+  cursor: pointer;
+  color: $red;
+}
+
+.close-modal:hover {
+  color: $white;
+  background-color: $red;
+  border-radius: 5px;
+}
+
+
+
