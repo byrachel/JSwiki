@@ -24,6 +24,11 @@ export default function Login({ setShow }) {
         history.push("/createaccount")
     }
 
+    const handlePassword = () => {
+        setShow(false);
+        history.push("/forgotpassword");
+    }
+
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <h2>Se connecter</h2>
@@ -38,14 +43,15 @@ export default function Login({ setShow }) {
                 <input type="password" className="text-input" name="password" ref={register({ required: true})} />
                 {errors.password && <span>Champ obligatoire.</span>}
             </div>
-            <br />
             <div className="center">
-                <Link to="/forgotpassword"> <p className="meta link">mot de passe oublié</p></Link>
-                <Button color='danger' rounded className='big-button' type="submit">Me connecter</Button>
+                <p className="meta link" onClick={() => handlePassword()} >mot de passe oublié</p>
+                <Button color='primary' rounded className='big-button' type="submit">Me connecter</Button>
             </div>
             <br />
-            <p className="center">Vous n'avez pas encore de compte ?</p>
-            <p className="center link" onClick={signup}>Créer un compte</p>
+            <div className="center">
+                <p>Vous n'avez pas encore de compte ?</p>
+                <Button color='danger' className='is-small' rounded outlined onClick={signup}>Créer un compte</Button>
+            </div>
         </form>
     )
 }

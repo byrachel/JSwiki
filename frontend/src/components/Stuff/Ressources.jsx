@@ -44,7 +44,7 @@ export default function Ressources() {
         const searchResult = data.filter((result) => {
             return result.title.toLowerCase().includes(search.toLowerCase())
         })
-        setFilteredData(searchResult)
+        setFilteredData(searchResult);
       }, [search, data, stuffLikes, stuff]);
 
     return (

@@ -24,6 +24,9 @@ var User = require('../models/User');
         //   resetPasswordExpires: Date.now() + 3600000,
         // });
 
+
+        // res.status(201).json({ message: 'mail envoyé'});
+
         const transporter = nodemailer.createTransport({
           service: 'gmail',
           auth: {
