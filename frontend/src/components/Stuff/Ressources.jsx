@@ -3,13 +3,14 @@ import useRequest from '../../hooks/useRequest';
 import { Link } from 'react-router-dom';
 import { TiHeartFullOutline } from 'react-icons/ti';
 import Button from 'react-bulma-components/lib/components/button';
-import { config } from '../Constants';
-
-let HEROKU_URL = config.url.HEROKU_URL;
+import { config } from '../../Constants';
+import { WikiContext } from '../../context/WikiContext';
 
 // Category icons
 import { TiCode, TiFolder, TiFlowChildren, TiPuzzle, TiLocationArrow } from 'react-icons/ti';
-import { WikiContext } from '../../context/WikiContext';
+
+let HEROKU_URL = config.url.HEROKU_URL;
+
 
 export default function Ressources() {
     const { data, loading, error } = useRequest(`${HEROKU_URL}/api/`);

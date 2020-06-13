@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from "react-hook-form";
 import axios from'axios';
 import Button from 'react-bulma-components/lib/components/button';
-import { config } from '../Constants';
+import { config } from '../../Constants';
 
 let HEROKU_URL = config.url.HEROKU_URL;
 const PasswordReset = () => {

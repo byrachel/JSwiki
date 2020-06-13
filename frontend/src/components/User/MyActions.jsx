@@ -3,7 +3,7 @@ import useRequest from '../../hooks/useRequest';
 import { UserContext } from '../../context/UserContext';
 import { Link } from 'react-router-dom';
 import Button from 'react-bulma-components/lib/components/button';
-import { config } from '../Constants';
+import { config } from '../../Constants';
 
 let HEROKU_URL = config.url.HEROKU_URL;
 
