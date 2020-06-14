@@ -2,15 +2,13 @@ import React, {useContext} from 'react';
 import { UserContext } from '../../context/UserContext';
 import { useForm } from "react-hook-form";
 import { TiFlash } from "react-icons/ti";
-import { useHistory } from "react-router-dom";
 
 import Button from 'react-bulma-components/lib/components/button';
 
 export default function CreateUserAccount() {
 
-    const { createUser, redirect, error } = useContext(UserContext);
+    const { createUser, newUser, error } = useContext(UserContext);
     const { register, handleSubmit, errors } = useForm();
-    const history = useHistory();
 
     const onSubmit = data => {
         const userData = {
@@ -23,9 +21,6 @@ export default function CreateUserAccount() {
             bio: null
         }
         createUser(userData);
-        if(redirect) {
-            history.push('/')
-        }
     }
 
     return (
@@ -35,7 +30,16 @@ export default function CreateUserAccount() {
             <div className="separator"></div>
             <br />
 
-            { error ? <p>Une erreur s'est produite, le compte n'a pu être créé.</p> : null}
+            { newUser ?
+                <div>
+                    <h2>Merci de votre inscription</h2>
+                    <p>Vous pouvez maintenant vous connecter et partager vos ressources avec la communauté des JSwikers !</p>
+                    <br />
+                </div>
+            
+            : <br />}
+
+            { error ? <p><strong>Le compte n'a pas été créé. Veuillez vérifier vos données ou essayer ultérieurement. <br /></strong></p> : null}
 
             <label htmlFor="firstname">Prénom</label>
             <input type="text" name="firstname" ref={register({ required: true, minLength: 3 })} />

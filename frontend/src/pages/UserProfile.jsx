@@ -15,7 +15,7 @@ export default function UserProfile() {
 
     // Récupérer les publications de l'utilisateur
     const author = `${userAccount.firstname}/${userAccount.lastname}`
-    const { data, loading, error } = useRequest(`${HEROKU_URL}/api/${author}`);
+    const { data, error } = useRequest(`${HEROKU_URL}/api/${author}`);
 
     useEffect(() => {
         displayOneUser(userId)
@@ -26,7 +26,9 @@ export default function UserProfile() {
 
         <div className="light-card">
 
-            <Columns breakpoint="mobile">
+            { error ? <p>Ce compte n'est plus accessible.</p> : null}
+
+            <Columns>
                 <Columns.Column size={4}>
                     <h2>{userAccount.firstname} {userAccount.lastname}</h2>
                     <div className="separator"></div>

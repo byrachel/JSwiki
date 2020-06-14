@@ -6,6 +6,7 @@ import Button from 'react-bulma-components/lib/components/button';
 import { config } from '../../Constants';
 
 let HEROKU_URL = config.url.HEROKU_URL;
+
 const NewPassword = () => {
 
     const { register, handleSubmit, errors } = useForm();

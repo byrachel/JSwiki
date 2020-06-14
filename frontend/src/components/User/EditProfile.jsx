@@ -8,7 +8,7 @@ import { TiTick } from "react-icons/ti";
 const EditProfile = ({ editMode, setEditMode }) => {
 
     const { register, handleSubmit, errors } = useForm();
-    const { updateUser, userProfile, getUser, userId } = useContext(UserContext);
+    const { updateUser, userProfile, userId } = useContext(UserContext);
 
     const onSubmit = ( data) => {
         console.log(data)

@@ -1,8 +1,9 @@
-
-const isLoggedIn = {
+const isAdmin = {
     check: (req, res, next) => {
         if(req.user) {
-            next()
+            if(req.user.admin) {
+                next()
+            }
         }
         else {
             res.status(401).json({message: 'unauthorized'})
@@ -10,4 +11,4 @@ const isLoggedIn = {
     }
 }
 
-module.exports = isLoggedIn;
+module.exports = isAdmin;

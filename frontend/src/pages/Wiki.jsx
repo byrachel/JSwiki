@@ -8,7 +8,7 @@ import StuffSidebar from '../components/Stuff/StuffSidebar';
 export default function Wiki() {
     return (
 
-            <Columns breakpoint="mobile">
+            <Columns>
                 <Columns.Column size={8}>
                     <Ressources />
                 </Columns.Column>

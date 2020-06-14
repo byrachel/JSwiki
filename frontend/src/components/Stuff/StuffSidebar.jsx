@@ -9,7 +9,7 @@ import { TiHeartOutline, TiFlash } from 'react-icons/ti';
 const StuffSidebar = () => {
 
     const { userId } = useContext(UserContext);
-    const { getRessources, ressources, addLike, stuffLikes } = useContext(WikiContext);
+    const { getRessources, ressources, addLike } = useContext(WikiContext);
     const [ update, setUpdate ] = useState(false);
 
     useEffect(() => {

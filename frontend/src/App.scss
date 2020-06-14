@@ -313,6 +313,7 @@ ul {
 
 .home-img {
   max-width: 50rem;
+  width: auto;
   height: auto;
   display: block;
   margin-left: auto;
@@ -428,4 +429,9 @@ textarea {
 }
 
 
-
+@media screen and (max-width: 640px) {
+  .ressource-cards {
+    display: block;
+    // grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -8,7 +8,7 @@ import LoginForm from '../components/User/LoginForm';
 export default function MyAccount_CreateAccount() {
     return (
 
-            <Columns breakpoint="mobile">
+            <Columns>
                 <Columns.Column size={8}>
                     <CreateUserAccount />
                 </Columns.Column>

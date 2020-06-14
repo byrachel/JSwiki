@@ -13,7 +13,7 @@ export default function Wiki_RessourceDetails() {
     return (
         <>
 
-            <Columns breakpoint="mobile">
+            <Columns>
                 <Columns.Column size={8}>
                     <EditRessource value={ressourceId} />
                 </Columns.Column>

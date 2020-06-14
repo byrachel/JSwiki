@@ -8,29 +8,16 @@ const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 
 /* Controllers imports */
-var newUser = require('../controllers/user');
+const userCtrl = require('../controllers/user');
 
 /* POST new user in collection Mongo. */
-router.post('/signup', function(req, res) {
-  newUser.createUser(req, res);
-});
+router.post('/signup', userCtrl.createUser);
 
 /* GET display MY account. */
-router.get('/myaccount', function(req, res) {
-    User.findOne({ _id: req.user._id }, (error, user) => {
-        if (error) { console.log(error); reject(error); }
-        else if (!user) reject(null);
-        else res.status(200).json(user)
-    });
-});
+router.get('/myaccount', userCtrl.myAccount);
 
 // GET display user profile
-router.get('/user/:id', function(req, res) {
-    User.findOne({ _id: req.params.id }, (error, user) => {
-        if(error) { reject(error) }
-        else {res.status(200).json(user)}
-  })
-})
+router.get('/user/:id', userCtrl.userProfile);
 
 /* POST permet de connecter l'utilisateur. */
 router.post('/login', passport.authenticate('local'), function(req, res) {
@@ -44,23 +31,7 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
 });
 
 // Update User
-router.put('/update/:id', function(req, res, next) {
-    console.log(req.user._id)
-    User.updateOne({_id: req.user._id}, {
-        email: req.body.email,
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        website: req.body.website,
-        github: req.body.github,
-        bio: req.body.bio
-    }, function(err) {
-        if (err) return next(err);
-        User.findOne(req.user._id, function(err, user) {
-            if (err) return next(err);
-            else res.status(200).json(user);
-        });
-    });
-});
+router.put('/update/:id', userCtrl.updateUser);
 
 // Déconnecter l'utilisateur
 router.get('/logout', (req, res, next) => {
@@ -89,48 +60,52 @@ router.get('/logout', (req, res, next) => {
 
 // Forget Password
 router.post('/forgotPassword', function(req, res) {
+
+    let HEROKU_URL = (process.env.NODE_ENV === 'development') ? 'http://localhost:3000' : 'https://jswikitech.herokuapp.com/';
+
     if (req.body.email === '') {
       res.status(400).send('email required');
     }
+
     const token = crypto.randomBytes(20).toString('hex');
+
     User.updateOne({
-        email: req.body.email,
-    },{
-        resetPasswordToken: token,
-        resetPasswordExpires: Date.now() + 1200000,
-    }
-    ).then((res) => {
-    console.log(res)
-    })
-    .catch((err) => console.log(err))
-        const transporter = nodemailer.createTransport({
-          service: 'gmail',
-          auth: {
+            email: req.body.email,
+        },{
+            resetPasswordToken: token,
+            resetPasswordExpires: Date.now() + 1200000,
+        }
+    )
+    .then((res) => res.status(200))
+    .catch((err) => res.status(500))
+
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
             user: `${process.env.EMAIL_ADDRESS}`,
             pass: `${process.env.EMAIL_PASSWORD}`,
-          },
-        });
+        },
+    });
 
-        const mailOptions = {
-          from: 'jswiki.tech@gmail.com',
-          to: req.body.email,
-          subject: 'Réinitialisation du mot de passe',
-          text:
-            'Vous recevez cet email parce que vous avez demandé la réinitialisation de votre mot de passe.\n\n'
-            + 'Merci de cliquer sur le lien ci-dessous (valide durant 20 minutes):\n\n'
-            + `http://localhost:3000/reset/${token}`
-        };
+    const mailOptions = {
+        from: 'jswiki.tech@gmail.com',
+        to: req.body.email,
+        subject: 'Réinitialisation du mot de passe',
+        text:
+        'Vous recevez cet email parce que vous avez demandé la réinitialisation de votre mot de passe.\n\n'
+        + 'Merci de cliquer sur le lien ci-dessous afin de créer un nouveau mot de passe pour votre compte :\n\n'
+        + `${HEROKU_URL}/reset/${token} \n\n'`
+        + 'Attention : ce lien est fonctionnel 20 minutes.'
+    };
 
-        console.log('sending mail');
-
-        transporter.sendMail(mailOptions, (err, res) => {
-          if (err) {
-            console.error('Une erreur est survenue: ', err);
-          } else {
-            res.status(200).json('Le mail de réinitialisation a été envoyé.');
-          }
-        });
-      
+    transporter.sendMail(mailOptions)
+    .then((response) => {
+        res.status(200).json({mailSent:true});
+    })
+    .catch((error) => {
+        console.error(error);
+        res.status(400).json({mailSent:false});
+    })
     
   });
 

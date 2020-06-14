@@ -7,7 +7,7 @@ export default function MyAccount() {
 
     return (
 
-        <Columns breakpoint="mobile">
+        <Columns>
             <Columns.Column size={4}>
                 <Profile />
             </Columns.Column>

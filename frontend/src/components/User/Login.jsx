@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import { UserContext } from '../../context/UserContext';
 import { useForm } from "react-hook-form";
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Button from 'react-bulma-components/lib/components/button';
 
 export default function Login({ setShow }) {

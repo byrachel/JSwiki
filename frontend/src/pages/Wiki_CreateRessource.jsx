@@ -9,7 +9,7 @@ export default function Wiki_ByCategory() {
 
     return (
 
-            <Columns breakpoint="mobile">
+            <Columns>
                 <Columns.Column size={8}>
                     <CreateRessource />
                 </Columns.Column>
