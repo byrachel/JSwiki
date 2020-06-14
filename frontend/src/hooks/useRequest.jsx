@@ -1,17 +1,18 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const useRequest = (initUrl) => {
+const useRequest = (url) => {
+
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     let ignore = false;
-    const fetchStuff = async () => {
+    const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await axios(initUrl);
+        const response = await axios(url);
         if (!ignore) {
           setData(response.data)};
       } catch (err) {
@@ -20,9 +21,9 @@ const useRequest = (initUrl) => {
         setLoading(false);
       }
     };
-    fetchStuff();
+    fetchData();
     return (() => { ignore = true; });
-  }, [initUrl]);
+  }, [url]);
 
   return { data, loading, error };
 };

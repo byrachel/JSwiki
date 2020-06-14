@@ -15,20 +15,20 @@ const MyActions = () => {
 
     return (
         <div className="light-card">
-            <h3>> Mes contributions :</h3>
+            <h3> Mes contributions :</h3>
 
-            {loading ? <div>Loading...</div> : null }
-            {error ? <div>Une erreur s'est produite.</div> : null }
+            {loading ? <p>Chargement en cours...</p> : null }
 
-            <div className="separator"></div>
+            {error ? <h2>Une erreur s'est produite. Le contenu n'est pas accessible pour le moment.</h2> : null }
+
             {data.map((post) =>
-            <li key={post._id}>
-                <Link to={`/wikisheet/${post._id}`}><span className="regular-list"><strong>{post.title} </strong></span></Link>
-                <Link to ={`/wikiedit/${post._id}`}><span className="meta-maj">update</span></Link>
-                { post.like >=1 ? 
-                    <span className="link">{post.like} { post.like <2 ? ' fan' : ' fans' }</span>: null}
-            </li>)}
-            <br />
+                <li key={post._id}>
+                    <Link to={`/wikisheet/${post._id}`}><span className="regular-list"><strong>{post.title} </strong></span></Link>
+                    <Link to ={`/wikiedit/${post._id}`}><span className="meta-maj">update</span></Link>
+                    { post.like >=1 ? 
+                        <span className="link">{post.like} { post.like <2 ? ' fan' : ' fans' }</span>: null}
+                </li>
+            )}
             <Link to="/createressource"><Button rounded className="button is-danger"><p>Ajouter une ressource</p></Button></Link>      
         </div>
     );

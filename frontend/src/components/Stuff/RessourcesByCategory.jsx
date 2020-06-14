@@ -45,7 +45,7 @@ export default function RessourcesByCategory(props) {
 
             </div>
 
-            {loading ? <div>Loading...</div> : null }
+            {loading ? <div>Chargement en cours...</div> : null }
             {error ? <div>Une erreur s'est produite.</div> : null }
 
             <ul className="ressource-cards">
