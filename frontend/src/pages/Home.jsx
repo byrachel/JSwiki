@@ -1,12 +1,18 @@
 import React from 'react';
 import '../App.scss';
 import CategoriesList from 'components/Stuff/CategoriesList';
+import { Helmet } from 'react-helmet';
 
 export default function Home() {
 
-
     return (
         <>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>JS(wiki) : 1ère communauté de développeurs JS francophone.</title>
+                <meta name="description" content="Tu es un développeur passionné de JavaScript ? Découvre et partage tes meilleures librairies et ressources JavaScript sur JS(wiki)." />
+                <link rel="canonical" href="https://jswikitech.herokuapp.com/" />
+            </Helmet>
 
             <div className="container">
                 <h1 className="center">Ressources & astuces JavaScript</h1>

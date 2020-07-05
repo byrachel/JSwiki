@@ -1,13 +1,15 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
-import { WikiContext } from '../../context/WikiContext';
 import { UserContext } from '../../context/UserContext';
 import { Editor } from '@tinymce/tinymce-react';
+import axios from 'axios';
+import { config } from '../../Constants';
+let HEROKU_URL = config.url.HEROKU_URL;
 
 function CreateRessource() {
 
-    const { createStuff } = useContext(WikiContext);
     const { userProfile } = useContext(UserContext);
+    const [ error, setError ] = useState(null);
     const [ contentRessource, setContentRessource ] = useState('Décrivez votre ressource avec le plus grand soin.')
     const { register, handleSubmit, errors } = useForm();
     const categories = ['Framework', 'Librairie', 'Composant', 'Software', 'Autre'];
@@ -21,7 +23,9 @@ function CreateRessource() {
             content: contentRessource,
             ...data
         }
-        createStuff(stuffData)
+        axios.post(`${HEROKU_URL}/api/create`, stuffData) 
+        .then((res) => {console.log(res.data)})
+        .catch((err) => {setError(err)})
     };
 
     const handleEditorChange = (content, editor) => {

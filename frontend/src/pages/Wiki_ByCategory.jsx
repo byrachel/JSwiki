@@ -12,8 +12,7 @@ export default function Wiki_ByCategory() {
 
     return (
         <>
-
-            <Columns>
+            <Columns is-desktop>
                 <Columns.Column size={8}>
                     <RessourcesByCategory value={category} />
                 </Columns.Column>
@@ -22,7 +21,6 @@ export default function Wiki_ByCategory() {
                 </Columns.Column>
             </Columns>
 
- 
         </>
     )
 }

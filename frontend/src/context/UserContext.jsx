@@ -15,6 +15,11 @@ export const UserProvider = ({children}) => {
     const [ error, setError ] = useState(false);
     const [ redirect, setRedirect ] = useState(false);
     const [ loginError, setLoginError ] = useState(null);
+    const [ stuffDetails, setStuffDetails ] = useState([]);
+    const [ stuffLikes, setStuffLikes ] = useState(null);
+    const [ ressources, setRessources ] = useState([]);
+    const [ update, setUpdate ] = useState(false);
+
 
     const createUser = (data) => {
         const userData = {
@@ -71,10 +76,23 @@ export const UserProvider = ({children}) => {
         .catch((err) => console.log(err))
     }
 
+    const addLike = (id, like) => {
+        const newLike = {
+            like: like +1
+        }
+        axios.put(`${HEROKU_URL}/api/update/${id}`, newLike)
+        .then((res) => setStuffLikes(+1))
+        .catch((err) => console.log(err))
+    }
+
+
+
     return(
         <UserContext.Provider value={{
             userId,
             userProfile,
+            addLike,
+            stuffLikes,
             getUser,
             createUser,
             loginUser,

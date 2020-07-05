@@ -2,20 +2,21 @@ import React, { useContext, useEffect } from 'react';
 import Table from '../../hooks/Table';
 import '../../hooks/Table.scss';
 import { useDate } from '../../hooks/useDate';
-import { WikiContext } from '../../context/WikiContext';
 import { TiTrash, TiEyeOutline } from 'react-icons/ti';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { config } from '../../Constants';
+import useRequest from '../../hooks/useRequest';
+let HEROKU_URL = config.url.HEROKU_URL;
 
 const HandleRessources = () => {
 
-    const { getRessources, ressources, deleteRessource, update } = useContext(WikiContext);
-
-    useEffect(() => {
-        getRessources()
-    }, [update]);
+    const { data, loading, error } = useRequest(`${HEROKU_URL}/api/`);
 
     const removeRessource = (id) => {
-        deleteRessource(id)
+        axios.delete(`${HEROKU_URL}/api/delete/${id}`)
+        .then((res) => console.log(res))
+        .then((err) => console.log(err))
     }
 
     const columns = [
@@ -50,14 +51,14 @@ const HandleRessources = () => {
 
     return (
         <div className="light-card">
-            { ressources.length > 0 ?
+            { data.length > 0 ?
             <>
                 <h3>Gérer les ressources</h3>
                 <div className="separator"></div>
                 <br />
-                <h2>Nombre de ressources : {ressources.length +1}</h2>
+                <h2>Nombre de ressources : {data.length +1}</h2>
                 <br />
-                <Table columns={columns} data={ressources} />
+                <Table columns={columns} data={data} />
             </>
             : <p>Aucun élément disponible pour le moment.</p>}
         </div>

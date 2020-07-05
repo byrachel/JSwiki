@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 // Import du middleware pour protéger les routes le nécessitant
-// const isLoggedIn = require('../middlewares/isLoggedIn');
-// const isAdmin = require('../middlewares/isAdmin');
+const isLogged = require('../middlewares/isLoggedIn');
+const isAdmin = require('../middlewares/isAdmin');
 
 // Import du middleware MULTER pour gérer l'upload d'images
 // const multer = require('../middlewares/multer');
@@ -14,10 +14,10 @@ const stuffCtrl = require('../controllers/stuff');
 router.post('/create/', stuffCtrl.createPost);
 
 // Methode PUT pour mettre à jour un objet + :id comme paramètre
-router.put('/update/:id', stuffCtrl.modifyPost);
+router.put('/update/:id', isLogged.check, stuffCtrl.modifyPost);
 
 // Méthode DELETE pour supprimer un objet 
-router.delete('/delete/:id', stuffCtrl.deletePost);
+router.delete('/delete/:id', isAdmin.check, stuffCtrl.deletePost);
 
 // Méthodes GET qui permettent d'envoyer des données au frontend
 router.get('/', stuffCtrl.getAllPosts);

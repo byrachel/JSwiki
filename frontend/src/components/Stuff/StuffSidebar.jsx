@@ -3,18 +3,19 @@ import Button from 'react-bulma-components/lib/components/button';
 import CategoriesList from './CategoriesList';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
-import { WikiContext } from '../../context/WikiContext';
+// import { WikiContext } from '../../context/WikiContext';
 import { TiHeartOutline, TiFlash } from 'react-icons/ti';
+import useRequest from '../../hooks/useRequest';
+import { config } from '../../Constants';
+
+let HEROKU_URL = config.url.HEROKU_URL;
 
 const StuffSidebar = () => {
 
-    const { userId } = useContext(UserContext);
-    const { getRessources, ressources, addLike } = useContext(WikiContext);
+    const { userId, addLike } = useContext(UserContext);
+    // const { ressources, addLike } = useContext(WikiContext);
     const [ update, setUpdate ] = useState(false);
-
-    useEffect(() => {
-        getRessources()
-    }, [update]);
+    const { data, loading, error } = useRequest(`${HEROKU_URL}/api/`);
 
     const handleLike = (id, like) => {
         addLike(id, like);
@@ -33,7 +34,7 @@ const StuffSidebar = () => {
             <h3>Derniers ajouts :</h3>
             <div className="separator"></div>
             <ul>
-                { ressources.slice(Math.max(ressources.length - 5, 0)).map((stuff) =>
+                { data.slice(Math.max(data.length - 5, 0)).map((stuff) =>
                 <li key={stuff._id}>
                     <Link to={`/wikisheet/${stuff._id}`}>
                         <TiFlash className="meta-icon vertical-center" /> 

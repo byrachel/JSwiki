@@ -25,10 +25,30 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
     if(req.user) {
         console.log(dataUser);
         res.json({
-            user: dataUser
+            user: dataUser,
+            isLogged: true
         });
     }
 });
+
+// var user = {
+//     // Connexion à un compte existant
+//     login: (req, res) => {
+//         if (!req.user) {
+//             res.status(418).json({ isConnected: false })
+//             return;
+//         }
+//         else {
+//             User_model.findOne({ _id: req.user._id }, (error, data) => {
+//                 if (error) {
+//                     res.status(500).end();
+//                     return;
+//                 }
+//                 res.json({ isLogged: true, user: data });
+//             });
+//             // res.status(200).json({ isConnected: true });
+//         }
+//     },
 
 // Update User
 router.put('/update/:id', userCtrl.updateUser);
@@ -40,7 +60,7 @@ router.get('/logout', (req, res, next) => {
             if (err) {
                     return next(err);
             }
-            res.status(200).send('OK');
+            res.status(200).send({isLogged: false});
     });
 });
 
@@ -86,7 +106,6 @@ router.post('/forgotPassword', function(req, res) {
             pass: `${process.env.EMAIL_PASSWORD}`,
         },
     });
-
     const mailOptions = {
         from: 'jswiki.tech@gmail.com',
         to: req.body.email,
@@ -97,9 +116,8 @@ router.post('/forgotPassword', function(req, res) {
         + `${HEROKU_URL}/reset/${token} \n\n'`
         + 'Attention : ce lien est fonctionnel 20 minutes.'
     };
-
     transporter.sendMail(mailOptions)
-    .then((response) => {
+    .then((res) => {
         res.status(200).json({mailSent:true});
     })
     .catch((error) => {

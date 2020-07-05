@@ -3,11 +3,9 @@ import useRequest from '../../hooks/useRequest';
 import { Link } from 'react-router-dom';
 import { TiHeartFullOutline } from 'react-icons/ti';
 import Button from 'react-bulma-components/lib/components/button';
+import Tag from 'react-bulma-components/lib/components/tag';
 import { config } from '../../Constants';
-import { WikiContext } from '../../context/WikiContext';
-
-// Category icons
-import { TiCode, TiFolder, TiFlowChildren, TiPuzzle, TiLocationArrow } from 'react-icons/ti';
+import { UserContext } from '../../context/UserContext';
 
 let HEROKU_URL = config.url.HEROKU_URL;
 
@@ -15,27 +13,26 @@ export default function Ressources() {
     const { data, loading, error } = useRequest(`${HEROKU_URL}/api/`);
     const [ search, setSearch ] = useState('');
     const [ filteredData, setFilteredData ] = useState(data);
-
-    const { addLike, stuffLikes, stuff } = useContext(WikiContext);
+    const { addLike, userId } = useContext(UserContext);
 
     const handleLike = (id, like) => {
         addLike(id, like)
     }
 
-    const setCategoryIcon = (category) => {
+    const setCategoryColor = (category) => {
         switch (category) {
             case 'Framework':
-                return( <TiCode className="framework-category-icon" /> )
+                return 'is-danger'
             case 'Librairie':
-                return( <TiFolder className="library-category-icon" />)
+                return 'is-primary'
             case 'Software':
-                return( <TiLocationArrow className="software-category-icon" />)
+                return 'is-light'
             case 'Composant':
-                return( <TiFlowChildren className="component-category-icon" />)
+                return 'is-dark'
             case 'Autre':
-                return( <TiPuzzle className="other-category-icon" />)
+                return 'is-info'
             default:
-                return('')
+                return 'is-light'
         }
     }
 
@@ -44,36 +41,49 @@ export default function Ressources() {
             return result.title.toLowerCase().includes(search.toLowerCase())
         })
         setFilteredData(searchResult);
-      }, [search, data, stuffLikes, stuff]);
+      }, [search, data]);
 
     return (
         <div className="container">
             <div className="light-card">
-
-                <h3>> Wiki </h3>
-                <div className="separator"></div>
-                <br />
-
-                <input type="text" name="search" onChange={(e) => setSearch(e.target.value)} value={search} placeholder="Recherche..." />
-
+                <h3>Annuaire de ressources JavaScript</h3>
             </div>
 
             {loading ? <div>Chargement en cours...</div> : null }
             
             {error ? <div>Une erreur s'est produite.</div> : null }
 
-            <ul className="ressource-cards">
+            <ul>
+
+                <div className="search-bar">
+                    <input type="text" name="search" className="search-bar-border" onChange={(e) => setSearch(e.target.value)} value={search} placeholder="Recherche..." />
+                </div>
+
                 {filteredData.map(d => 
                 <li key={d._id}>
                     <div className="card">
-                        <p className="meta right"><TiHeartFullOutline className="like-icon vertical-center" onClick={() => handleLike(d._id, d.like)} />{d.like} { d.like <2 ? 'fan' : 'fans' }</p>
-                        <h2>{d.title}</h2>
-                        <p>{d.resum}</p>
-                        <br />
-                        <div className="ressource-cards center">
-                            <Link to={`/wiki/${d.category}`}><Button rounded outlined className="meta-button">{setCategoryIcon(d.category)}{d.category}</Button></Link>
-                            <Link to={`/wikisheet/${d._id}`}><Button rounded outlined className="meta-button is-danger">Lire la fiche</Button></Link>
+                        <div className="right">
+                        <Link to={`/wiki/${d.category}`}><Tag className={setCategoryColor(d.category)}>{d.category}</Tag></Link>
+
                         </div>
+
+                        <h2>{d.title}</h2>
+                        <div className="separator"></div>
+
+                        <p>{d.resum}</p>
+
+                        { userId !== null ?
+                            <Link to ={`/wikiedit/${d._id}`}><Button rounded className="meta-button is-small">Mettre à jour</Button></Link>
+                            :
+                            null
+                        }
+                        <br />
+
+                        <div className="right">
+                            <Link to={`/wikisheet/${d._id}`}><Button rounded outlined className="meta-button is-danger is-small">Lire la fiche</Button></Link>
+                        </div>
+                        <p className="meta"><TiHeartFullOutline className="like-icon vertical-center" onClick={() => handleLike(d._id, d.like)} />{d.like} { d.like <2 ? 'fan' : 'fans' }</p>
+
                     </div>
                 </li>)}
             </ul>

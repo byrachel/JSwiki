@@ -1,18 +1,24 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
-import { WikiContext } from '../../context/WikiContext';
+// import { WikiContext } from '../../context/WikiContext';
 import { UserContext } from '../../context/UserContext';
 import { Editor } from '@tinymce/tinymce-react';
 import { useHistory } from 'react-router-dom';
+import useRequest from '../../hooks/useRequest';
+import axios from 'axios';
+import { config } from '../../Constants';
+let HEROKU_URL = config.url.HEROKU_URL;
 
 function EditRessource(props) {
 
-    const { getRessourceDetails, stuffDetails, editStuff } = useContext(WikiContext);
+    const id = props.value;
+
+    // const { stuffDetails, editStuff } = useContext(WikiContext);
     const [ contentRessource, setContentRessource ] = useState('Décrivez votre ressource avec le plus grand soin.')
-    const [ error, setError ] = useState(null);
+    const [ errorEdit, setErrorEdit ] = useState(null);
+    const { data, loading, error } = useRequest(`${HEROKU_URL}/api/${id}`);
 
     const { userProfile } = useContext(UserContext);
-    const id = props.value;
     const today = new Date();
     const history = useHistory();
 
@@ -26,16 +32,21 @@ function EditRessource(props) {
             content: contentRessource,
             ...data
         }
-        editStuff(id, stuffData,
-        () => history.push(`/wikisheet/${id}`),
-        (err) => { setError("Une erreur s'est produite.")}
-      );
-        
+    //     editStuff(id, stuffData,
+    //     () => history.push(`/wikisheet/${id}`),
+    //     (err) => { setErrorEdit("Une erreur s'est produite.")}
+    //   );
+
+        // const editStuff = (id, stuffData) => {
+            axios.put(`${HEROKU_URL}/api/update/${id}`, stuffData, {withCredentials:true}) 
+            .then((res) => history.push(`/wikisheet/${id}`))
+            .catch((err) => setErrorEdit("Une erreur s'est produite."))
+        // }        
     };
 
-    useEffect(() => {
-        getRessourceDetails(id)
-    }, [id]);
+    // useEffect(() => {
+    //     getRessourceDetails(id)
+    // }, [id]);
 
     const handleEditorChange = (content, editor) => {
         setContentRessource(content)
@@ -52,12 +63,12 @@ function EditRessource(props) {
         <br />
         <form onSubmit={handleSubmit(onSubmit)} >
 
-            { error ? <h2>{error}</h2>: null}
+            { errorEdit ? <h2>{errorEdit}</h2>: null}
 
             <div className="form-item">
                 <label htmlFor="category">
                     <strong>Catégorie </strong>:
-                    <select name="category" ref={register({ required: true })} defaultValue={stuffDetails.category}>
+                    <select name="category" ref={register({ required: true })} defaultValue={data.category}>
                         <option>Sélectionnez une catégorie</option>
                         {categories.map((category, index) =>
                         <option key={index} value={category}>{category}</option>
@@ -71,7 +82,7 @@ function EditRessource(props) {
             <div className="form-item">
                 <label htmlFor="title">
                     <strong>Titre</strong> (nom de la ressource) :
-                    <input type="text" name="title" ref={register({ required: true, maxLength: 30 })} defaultValue={stuffDetails.title} />
+                    <input type="text" name="title" ref={register({ required: true, maxLength: 30 })} defaultValue={data.title} />
                     <p className="error">{errors.title && "Le nom ne peut dépasser 30 caractères."}</p>
                 </label>
             </div>
@@ -79,7 +90,7 @@ function EditRessource(props) {
             <div className="form-item">
                 <label htmlFor="resum">
                     <strong>Résumé</strong> (maximum 100 caractères) :
-                    <input type="text" name="resum" ref={register({ required: true, maxLength: 100 })} defaultValue={stuffDetails.resum} />
+                    <input type="text" name="resum" ref={register({ required: true, maxLength: 100 })} defaultValue={data.resum} />
                     <p className="error">{errors.resum && "Ce champ est obligatoire."}</p>
                 </label>
             </div>
@@ -95,7 +106,7 @@ function EditRessource(props) {
             <Editor
                 apiKey='idfcao36zm119d142p5ohd71hczgjurc6wyxdqztp86181mr'
                 cloudChannel='stable'
-                value={stuffDetails.content}
+                value={data.content}
                 init={{
                 height: 500,
                 menubar: false,
@@ -114,7 +125,7 @@ function EditRessource(props) {
             <div className="form-item">
                 <label htmlFor="link">
                     <strong>Lien</strong> (url complète) :
-                    <input type="text" name="link" ref={register} defaultValue={stuffDetails.link}/>
+                    <input type="text" name="link" ref={register} defaultValue={data.link}/>
                     <p className="error">{errors.link && "Ce champ est obligatoire."}</p>
                 </label>
             </div>
