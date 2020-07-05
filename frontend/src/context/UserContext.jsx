@@ -15,10 +15,7 @@ export const UserProvider = ({children}) => {
     const [ error, setError ] = useState(false);
     const [ redirect, setRedirect ] = useState(false);
     const [ loginError, setLoginError ] = useState(null);
-    const [ stuffDetails, setStuffDetails ] = useState([]);
     const [ stuffLikes, setStuffLikes ] = useState(null);
-    const [ ressources, setRessources ] = useState([]);
-    const [ update, setUpdate ] = useState(false);
 
 
     const createUser = (data) => {
@@ -91,6 +88,7 @@ export const UserProvider = ({children}) => {
         <UserContext.Provider value={{
             userId,
             userProfile,
+            userAccount,
             addLike,
             stuffLikes,
             getUser,
@@ -103,7 +101,6 @@ export const UserProvider = ({children}) => {
             error,
             newUser,
             displayOneUser,
-            userAccount
             }}>
             {children}
         </UserContext.Provider>

@@ -50,7 +50,7 @@ export default function Login({ setShow }) {
             <br />
             <div className="center">
                 <p>Vous n'avez pas encore de compte ?</p>
-                <Button color='danger' className='is-small' rounded outlined onClick={signup}>Créer un compte</Button>
+                <p className="link" onClick={signup}>Créer un compte</p>
             </div>
         </form>
     )

@@ -19,7 +19,7 @@ export default function UserProfile() {
 
     useEffect(() => {
         displayOneUser(userId)
-      }, [userId]);
+    }, [userId]);
 
 
     return (

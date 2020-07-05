@@ -36,13 +36,15 @@ function CreateRessource() {
 
     <div className="light-card">
 
-        <h3>> Wiki > Publier une ressource</h3>
+        <h3>Wiki - Publier une ressource</h3>
         <div className="separator"></div>
 
         <br />
         <h2>Publier une nouvelle ressource :</h2>
         <br />
         <form onSubmit={handleSubmit(onSubmit)} >
+
+            { error ? <p>Une erreur est survenue. Le contenu n'a pu être enregistré.</p> : null}
 
             <div className="form-item">
                 <label htmlFor="category">
@@ -93,8 +95,7 @@ function CreateRessource() {
                             'insertdatetime media table paste help wordcount'
                         ],
                         toolbar:
-                            'fontsizeselect | bold | italic | link | code | codesample |  \
-                            bullist numlist outdent indent | removeformat | undo redo help'
+                            'fontsizeselect | bold | italic | link | code | codesample | bullist numlist outdent indent | removeformat | undo redo'
                         }}
                         onEditorChange={handleEditorChange}
                     />

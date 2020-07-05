@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import Table from '../../hooks/Table';
 import '../../hooks/Table.scss';
 import { useDate } from '../../hooks/useDate';
@@ -51,16 +51,17 @@ const HandleRessources = () => {
 
     return (
         <div className="light-card">
-            { data.length > 0 ?
-            <>
-                <h3>Gérer les ressources</h3>
-                <div className="separator"></div>
-                <br />
-                <h2>Nombre de ressources : {data.length +1}</h2>
-                <br />
-                <Table columns={columns} data={data} />
-            </>
-            : <p>Aucun élément disponible pour le moment.</p>}
+            <h3>Gérer les ressources</h3>
+            <div className="separator"></div>
+
+            { loading ? <p>Chargement en cours...</p> :
+                error ? <p>Une erreur est survenue. Aucune donnée n'est disponible pour le moment.</p> : 
+                    <>
+                        <h2>Nombre de ressources : {data.length +1}</h2>
+                        <br />
+                        <Table columns={columns} data={data} />
+                    </>
+            }
         </div>
     );
 }

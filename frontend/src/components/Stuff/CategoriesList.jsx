@@ -7,13 +7,12 @@ const CategoriesList = () => {
 
     return (
         <div className="buttons-sidebar buttons is-centered">
-            <Link to="/wiki/Framework"><Button rounded className="button is-danger" outlined><TiCode className="category-nav-icon" /> Frameworks</Button></Link>
-            <Link to="/wiki/Librairie"><Button rounded className="button is-info" outlined><TiFolder className="category-nav-icon" /> Librairies</Button></Link>
-            <Link to="/wiki/Composant"><Button rounded className="button is-warning" outlined><TiLocationArrow className="category-nav-icon" /> Composants</Button></Link>
-            <Link to="/wiki/Software"><Button rounded className="button is-success" outlined><TiFlowChildren className="category-nav-icon" /> Software</Button></Link>
-            <Link to="/wiki/Autre"><Button rounded className="button is-black" outlined><TiPuzzle className="category-nav-icon" /> Autre</Button></Link>
-            <Link to="/wiki/"><Button rounded className="button is-primary" outlined> Toutes catégories</Button></Link>
-
+            <Link to="/wiki/Framework"><Button rounded className="button is-danger is-small" ><TiCode className="category-nav-icon" /> Frameworks</Button></Link>
+            <Link to="/wiki/Librairie"><Button rounded className="button is-info is-small" ><TiFolder className="category-nav-icon" /> Librairies</Button></Link>
+            <Link to="/wiki/Composant"><Button rounded className="button is-warning is-small" ><TiLocationArrow className="category-nav-icon" /> Composants</Button></Link>
+            <Link to="/wiki/Software"><Button rounded className="button is-success is-small" ><TiFlowChildren className="category-nav-icon" /> Software</Button></Link>
+            <Link to="/wiki/Autre"><Button rounded className="button is-black is-small" ><TiPuzzle className="category-nav-icon" /> Autre</Button></Link>
+            <Link to="/wiki/"><Button rounded className="button is-primary is-small" > Toutes catégories</Button></Link>
         </div>
     );
 }

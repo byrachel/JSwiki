@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from 'react-bulma-components/lib/components/button';
 import CategoriesList from './CategoriesList';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
-// import { WikiContext } from '../../context/WikiContext';
 import { TiHeartOutline, TiFlash } from 'react-icons/ti';
 import useRequest from '../../hooks/useRequest';
 import { config } from '../../Constants';
@@ -13,9 +12,8 @@ let HEROKU_URL = config.url.HEROKU_URL;
 const StuffSidebar = () => {
 
     const { userId, addLike } = useContext(UserContext);
-    // const { ressources, addLike } = useContext(WikiContext);
     const [ update, setUpdate ] = useState(false);
-    const { data, loading, error } = useRequest(`${HEROKU_URL}/api/`);
+    const { data } = useRequest(`${HEROKU_URL}/api/`);
 
     const handleLike = (id, like) => {
         addLike(id, like);
