@@ -38,11 +38,11 @@ label {
 }
 
 .regular-list {
-  font-size: 1rem;
+  font-size: .9rem;
   font-family: $family-primary;
   color: $grey;
   cursor: pointer;
-  line-height: 2rem;
+  line-height: 1.5rem;
 }
 
 .regular-list:hover {
@@ -85,7 +85,7 @@ label {
 }
 
 .meta-icon {
-  width: 1.1rem;
+  width: 1rem;
   height: auto;
   color: $grey;
   margin: 0;

@@ -3,7 +3,7 @@ import Button from 'react-bulma-components/lib/components/button';
 import CategoriesList from './CategoriesList';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
-import { TiHeartOutline, TiFlash } from 'react-icons/ti';
+import { TiHeartOutline, TiFlashOutline } from 'react-icons/ti';
 import useRequest from '../../hooks/useRequest';
 import { config } from '../../Constants';
 
@@ -35,7 +35,7 @@ const StuffSidebar = () => {
                 { data.slice(Math.max(data.length - 5, 0)).map((stuff) =>
                 <li key={stuff._id}>
                     <Link to={`/wikisheet/${stuff._id}`}>
-                        <TiFlash className="meta-icon vertical-center" /> 
+                        <TiFlashOutline className="meta-icon vertical-center" /> 
                         <span className="regular-list">{stuff.title}</span>
                     </Link>
                     <span className="meta-maj">
