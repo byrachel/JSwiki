@@ -9,6 +9,7 @@ export const UserContext = createContext();
 export const UserProvider = ({children}) => {
 
     const [ userId, setUserId ] = useState(null);
+    const [ user, setUser ] = useState([]);
     const [ userProfile, setUserProfile ] = useState([]); // mon compte
     const [ userAccount, setUserAccount ] = useState([]); // compte d'un autre user
     const [ newUser, setNewUser ] = useState(false);
@@ -45,15 +46,14 @@ export const UserProvider = ({children}) => {
     const getUser = () => {
         axios.get(`${HEROKU_URL}/auth/myaccount`, {withCredentials: true})
         .then((res) => {
-            console.log(res.data)
+            setUser(res.data)
             setUserProfile(res.data)
         })
         .catch((err) => console.log(err))
     }
 
     useEffect(() => {
-        getUser()
-        console.log(userProfile)        
+        getUser();
     }, [userId]);
 
     const displayOneUser = id => {
@@ -101,6 +101,7 @@ export const UserProvider = ({children}) => {
             error,
             newUser,
             displayOneUser,
+            user
             }}>
             {children}
         </UserContext.Provider>

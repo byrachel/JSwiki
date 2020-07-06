@@ -60,7 +60,6 @@ const RessourceDetails = (props) => {
             <div className="light-card">
 
                 <h3>Wiki - Fiche détaillée</h3>
-                <div className="separator"></div>
             </div>
 
             { loading ? <p>Chargement en cours...</p> :
@@ -71,32 +70,37 @@ const RessourceDetails = (props) => {
 
                     <div className="right">
                         <Tag className={setCategoryColor(data.category)}>{data.category}</Tag>
-                        <span className="vertical-center like-container"><TiHeartFullOutline className="like-icon vertical-center" onClick={() => handleLike(data._id, data.like)} />
-                            {data.like} { data.like <2 ? 'fan' : 'fans' }
-                        </span>
                     </div>
-                    <h1 className="heading-ressource">{data.title}</h1>
-
-                    <br />
-
-                    <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
-                    <br />
-
-                    <p className="resum"><strong>En savoir plus : </strong><a href={data.link}>{data.link}</a></p>
-
-
-                    <br />
+                    <h2 className="heading-ressource">{data.title}</h2>
                     <div className="separator"></div>
-                    { userId != null ?
-                    <Link to ={`/wikiedit/${id}`}><Button rounded className="button is-danger right is-small" outlined>Mettre à jour</Button></Link>
-                    :
-                    <Button rounded className="button is-danger right is-small" outlined onClick={() => setShow(true)} >Mettre à jour</Button>
-                    }
+                    <p className="meta">{data.resum}</p>
 
 
+                    <br />
 
-                    <p className="meta-info"><TiFlash className="meta-icon vertical-center" /> Créé le {moment(data.date).format('LLLL')} par <Link to={`/useraccount/${data.authorId}`}>{data.author}</Link></p>
-                    <p className="meta-info"><TiFlashOutline className="meta-icon vertical-center" />Mis à jour le {moment(data.majDate).format('LLLL')} par {data.majAuthor}</p>
+                    {/* <div dangerouslySetInnerHTML={{ __html: data.content }}></div> */}
+                    <p dangerouslySetInnerHTML={{ __html: data.content }}></p>
+
+                    <br />
+
+                    <p className="meta">Lien officiel : <a href={data.link}>{data.link}</a></p>
+
+                    { userId !== null ?
+                        <Link to ={`/wikiedit/${id}`}><Button rounded className="button is-danger right is-small" outlined>Mettre à jour</Button></Link>
+                        :
+                        <Button rounded className="button is-danger right is-small" outlined onClick={() => setShow(true)} >Mettre à jour</Button>
+                        }
+                    <div className="like-container">
+                        <TiHeartFullOutline className="like-icon vertical-center" onClick={() => handleLike(data._id, data.like)} />
+                        {data.like} { data.like <2 ? 'fan' : 'fans' }
+                    </div>
+
+                    <br />
+                    <div className="footer-card"></div>
+
+                        <p className="meta-info"><TiFlash className="meta-icon vertical-center" /> Créé le {moment(data.date).format('LLLL')} par <Link to={`/useraccount/${data.authorId}`}>{data.author}</Link></p>
+                        <p className="meta-info"><TiFlashOutline className="meta-icon vertical-center" />Mis à jour le {moment(data.majDate).format('LLLL')} par {data.majAuthor}</p>
+                        
                     <LoginModal show={show} setShow={setShow} />
 
                 </div>

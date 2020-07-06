@@ -1,19 +1,19 @@
 import React from 'react';
 import { TiCode, TiFolder, TiFlowChildren, TiPuzzle, TiLocationArrow } from 'react-icons/ti';
-import Button from 'react-bulma-components/lib/components/button';
 import { Link } from 'react-router-dom';
+import Tag from 'react-bulma-components/lib/components/tag';
 
 const CategoriesList = () => {
 
     return (
-        <div className="buttons-sidebar buttons is-centered">
-            <Link to="/wiki/Framework"><Button rounded className="button is-danger is-small" ><TiCode className="category-nav-icon" /> Frameworks</Button></Link>
-            <Link to="/wiki/Librairie"><Button rounded className="button is-info is-small" ><TiFolder className="category-nav-icon" /> Librairies</Button></Link>
-            <Link to="/wiki/Composant"><Button rounded className="button is-warning is-small" ><TiLocationArrow className="category-nav-icon" /> Composants</Button></Link>
-            <Link to="/wiki/Software"><Button rounded className="button is-success is-small" ><TiFlowChildren className="category-nav-icon" /> Software</Button></Link>
-            <Link to="/wiki/Autre"><Button rounded className="button is-black is-small" ><TiPuzzle className="category-nav-icon" /> Autre</Button></Link>
-            <Link to="/wiki/"><Button rounded className="button is-primary is-small" > Toutes catégories</Button></Link>
-        </div>
+        <>
+            <Link to="/wiki/Framework"><Tag className="is-danger is-light tag"><TiCode className="category-nav-icon" /> Frameworks</Tag></Link>
+            <Link to="/wiki/Librairie"><Tag className="is-primary is-light  tag"><TiFolder className="category-nav-icon" /> Librairies</Tag></Link>
+            <Link to="/wiki/Composant"><Tag className="is-success is-light tag"><TiLocationArrow className="category-nav-icon" /> Composants</Tag></Link>
+            <Link to="/wiki/Software"><Tag className="is-light tag"><TiFlowChildren className="category-nav-icon" /> Software</Tag></Link>
+            <Link to="/wiki/Autre"><Tag className="is-warning is-light tag"><TiPuzzle className="category-nav-icon" /> Autre</Tag></Link>
+            <br />
+        </>
     );
 }
 

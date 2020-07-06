@@ -9,22 +9,26 @@ h1, h2, h3, p {
 }
 
 h1 {
-  font-size: 1.8rem;
+  font-size: 1.75rem;
   font-weight: 500;
   margin-top: 3rem;
 }
 
 h2 {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   letter-spacing: 1px;
   font-weight: 700;
-  // padding: .5rem 0;
 }
 
 h4 {
   font-size: 1.2rem;
   letter-spacing: 1px;
   padding: .5rem 0;
+}
+
+p {
+  font-weight: 500;
+  font-size: .9rem;
 }
 
 label {
@@ -83,7 +87,7 @@ label {
 .meta-icon {
   width: 1.1rem;
   height: auto;
-  color: $red;
+  color: $grey;
   margin: 0;
   padding: 0;
 }
@@ -97,6 +101,14 @@ label {
 
 .like-container {
   font-size: .8rem;
+  margin: 0;
+  color: $grey;
+  vertical-align: middle;
+}
+
+.footer-card {
+  border-top: solid 1px lighten($color: $grey, $amount: 40);
+  margin-bottom: 2rem;
 }
 
 .like-icon {
@@ -104,7 +116,7 @@ label {
   height: auto;
   color: $red;
   cursor: pointer;
-  margin-left: 5px;
+  // margin-left: 5px;
   margin-right: 5px;
 
 }
@@ -189,9 +201,8 @@ p {
 }
 
 .meta {
-  vertical-align: center;
   font-size: .85rem;
-  color: lighten($color: $grey, $amount: 10);
+  color: darken($color: $grey, $amount: 10);
 }
 
 .meta-button {
@@ -202,9 +213,9 @@ p {
 
 .meta-info {
   font-size: .8rem;
-  color: lighten($color: $grey, $amount: 35);
-  margin-top: -.5rem;
-  line-height: .4rem;
+  color: $grey;
+  line-height: .75rem;
+
 }
 
 ul {
@@ -216,7 +227,7 @@ ul {
 .card {
   border: solid 1px lighten($color: $black, $amount: 65);
   border-radius: 5px;
-  margin: 1rem;
+  margin: 1rem 0;
   padding: 1rem;
 
   h2 {
@@ -226,41 +237,32 @@ ul {
     color: $black;
     font-size: 1.4rem;
   }
-  p {
-    margin-bottom: 1rem;
-    color: $black;
-  }
 }
 
 .card-details {
   border: solid 1px lighten($color: $black, $amount: 90);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  margin: 1rem;
-  padding: 2rem;
+  margin: 1rem 0;
+  padding: 1.5rem;
 
   h2 {
-    margin-bottom: 1.8rem;
+    margin-bottom: .75rem;
     padding: 0;
     font-weight: 500;
     letter-spacing: 1px;
     color: $black;
     font-size: 1.4rem;
   }
-  p {
-    margin-bottom: 1rem;
-    color: $black;
-  }
 }
 
 .light-card {
-  margin: 3rem 1rem;
+  margin: 2rem 1rem;
 
 }
 
 .heading-ressource {
   margin: 0;
-  padding-bottom: 1rem;
   font-weight: bold;
   letter-spacing: 1px;
 }
@@ -429,10 +431,14 @@ textarea {
   border-radius: 5px;
 }
 
-.search-bar {
-  margin: 1rem;
-}
+// .search-bar {
+//   margin: 1rem;
+// }
 
 .search-bar-border {
   border-radius: 4px;
+}
+
+.tag {
+  margin: 0 .25rem .25rem 0;
 }

@@ -22,7 +22,11 @@
     color: $black;
     display: flex;
     justify-content: flex-start;
-    margin: 1rem;
+    margin: 1rem 0;
+}
+.bolder {
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
 .button-icon {

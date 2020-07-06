@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Table from '../../hooks/Table';
 import '../../hooks/Table.scss';
 import { useDate } from '../../hooks/useDate';
@@ -7,14 +7,16 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { config } from '../../Constants';
 import useRequest from '../../hooks/useRequest';
+import { UserContext } from '../../context/UserContext';
 let HEROKU_URL = config.url.HEROKU_URL;
 
 const HandleRessources = () => {
 
     const { data, loading, error } = useRequest(`${HEROKU_URL}/api/`);
+    const { user } = useContext(UserContext);
 
     const removeRessource = (id) => {
-        axios.delete(`${HEROKU_URL}/api/delete/${id}`)
+        axios.delete(`${HEROKU_URL}/api/delete/${id}`, {withCredentials: true})
         .then((res) => console.log(res))
         .then((err) => console.log(err))
     }
@@ -50,19 +52,24 @@ const HandleRessources = () => {
     ]
 
     return (
-        <div className="light-card">
-            <h3>Gérer les ressources</h3>
-            <div className="separator"></div>
 
-            { loading ? <p>Chargement en cours...</p> :
-                error ? <p>Une erreur est survenue. Aucune donnée n'est disponible pour le moment.</p> : 
-                    <>
-                        <h2>Nombre de ressources : {data.length +1}</h2>
-                        <br />
-                        <Table columns={columns} data={data} />
-                    </>
-            }
-        </div>
+        <>
+        { user.admin ?
+            <div className="light-card">
+                <h3>Gérer les ressources</h3>
+                <div className="separator"></div>
+
+                { loading ? <p>Chargement en cours...</p> :
+                    error ? <p>Une erreur est survenue. Aucune donnée n'est disponible pour le moment.</p> : 
+                        <>
+                            <h2>Nombre de ressources : {data.length +1}</h2>
+                            <br />
+                            <Table columns={columns} data={data} />
+                        </>
+                }
+            </div>
+        : <p>Vous n'avez pas accès à cette page.</p> }
+        </>
     );
 }
 

@@ -9,7 +9,6 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 // Import User Context API
 import { UserProvider } from './context/UserContext';
-// import { WikiProvider } from 'context/WikiContext';
 
 // Import Components
 import Header from './components/Layout/Header';

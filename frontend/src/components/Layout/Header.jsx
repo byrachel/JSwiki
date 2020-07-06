@@ -1,8 +1,7 @@
 import React, { useState, useContext } from 'react';
 import './Layout.scss';
 import { Link } from 'react-router-dom';
-import { TiUser } from "react-icons/ti";
-import { TiFlashOutline, TiThMenu } from "react-icons/ti";
+import { TiFlash, TiThMenu, TiLockClosed, TiUser } from "react-icons/ti";
 import { UserContext } from '../../context/UserContext';
 
 import Button from 'react-bulma-components/lib/components/button';
@@ -10,7 +9,7 @@ import Login from '../User/Login';
 
 export default function Header() {
 
-    const { userId } = useContext(UserContext);
+    const { userId, user } = useContext(UserContext);
     const [show, setShow] = useState(false);
     const [ navOpen, setNavOpen ] = useState(0);
 
@@ -39,7 +38,11 @@ export default function Header() {
                 <nav className="responsive-toolbar">
 
                     <ul className={ navOpen ? 'active' : '' }>
-                        <Link to='/wiki'><p>wiKi<TiFlashOutline className="nav-icon" /></p></Link>
+                        <Link to='/wiki' onClick={() => setNavOpen(0)}><p className="bolder">wiKi</p><TiFlash className="nav-icon" /></Link>
+
+                        { user.admin ?
+                            <Link to='/admin'><p className="bolder">admin</p><TiLockClosed className="nav-icon" /></Link>
+                        : null}
 
                         { navOpen ?
                         
