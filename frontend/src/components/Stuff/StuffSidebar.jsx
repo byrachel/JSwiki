@@ -47,9 +47,9 @@ const StuffSidebar = () => {
             <br />
             <div className="center">
                 { userId != null ?
-                <Link to="/createressource"><Button rounded className="button is-danger"><p>Ajouter une ressource</p></Button></Link>
+                <Link to="/createressource"><Button rounded className="button is-danger is-small">Ajouter une ressource</Button></Link>
                 :
-                <Link to="/createaccount"><Button rounded className="button is-danger"><p>Ajouter une ressource</p></Button></Link>
+                <Link to="/createaccount"><Button rounded className="button is-danger is-small">Ajouter une ressource</Button></Link>
                 }
             </div>
         </div>

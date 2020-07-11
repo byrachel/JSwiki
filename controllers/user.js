@@ -43,7 +43,6 @@ exports.myAccount = (req, res, next) => {
 exports.userProfile = (req, res, next) => {
 
     User.findOne({ _id: req.params.id }, (error, user) => {
-        console.log(req.params)
         if(error) {
             reject(error)
         }

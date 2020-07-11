@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { TiHeartFullOutline, TiFlash, TiFlashOutline } from 'react-icons/ti';
 import Button from 'react-bulma-components/lib/components/button';
 import { Link } from 'react-router-dom';
@@ -16,14 +16,20 @@ const RessourceDetails = (props) => {
 
     const id = props.value;
     const { data, loading, error } = useRequest(`${HEROKU_URL}/api/${id}`);
-
-    const { userId, addLike } = useContext(UserContext)
-    const [show, setShow] = useState(false);
-
     moment.locale('fr');
 
+    const { isLogged, addLike } = useContext(UserContext)
+    const [show, setShow] = useState(false);
+
+    const [ likes, setLikes ] = useState(0);
+
+    useEffect(() => {
+        setLikes(data.like)
+    }, [data]);
+
     const handleLike = (id, like) => {
-        addLike(id, like)
+        setLikes(likes +1);
+        addLike(id, like);
     }
 
     const setCategoryColor = (category) => {
@@ -75,32 +81,32 @@ const RessourceDetails = (props) => {
                     <div className="separator"></div>
                     <p className="meta">{data.resum}</p>
 
-
                     <br />
 
-                    {/* <div dangerouslySetInnerHTML={{ __html: data.content }}></div> */}
                     <p dangerouslySetInnerHTML={{ __html: data.content }}></p>
 
                     <br />
 
                     <p className="meta">Lien officiel : <a href={data.link}>{data.link}</a></p>
+                    <br />
 
-                    { userId !== null ?
+                    { isLogged ?
                         <Link to ={`/wikiedit/${id}`}><Button rounded className="button is-danger right is-small" outlined>Mettre à jour</Button></Link>
-                        :
+                    :
                         <Button rounded className="button is-danger right is-small" outlined onClick={() => setShow(true)} >Mettre à jour</Button>
-                        }
+                    }
                     <div className="like-container">
                         <TiHeartFullOutline className="like-icon vertical-center" onClick={() => handleLike(data._id, data.like)} />
-                        {data.like} { data.like <2 ? 'fan' : 'fans' }
+                        {likes} { likes <2 ? 'fan' : 'fans' }
                     </div>
 
                     <br />
                     <div className="footer-card"></div>
 
                         <p className="meta-info"><TiFlash className="meta-icon vertical-center" /> Créé le {moment(data.date).format('LLLL')} par <Link to={`/useraccount/${data.authorId}`}>{data.author}</Link></p>
-                        <p className="meta-info"><TiFlashOutline className="meta-icon vertical-center" />Mis à jour le {moment(data.majDate).format('LLLL')} par {data.majAuthor}</p>
-                        
+                        { data.maj ?
+                            <p className="meta-info"><TiFlashOutline className="meta-icon vertical-center" />Mis à jour le {moment(data.majDate).format('LLLL')} par <Link to={`/useraccount/${data.authorId}`}>{data.majAuthor}</Link></p>
+                        : null}
                     <LoginModal show={show} setShow={setShow} />
 
                 </div>

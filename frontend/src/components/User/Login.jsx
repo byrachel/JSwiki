@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import { UserContext } from '../../context/UserContext';
 import { useForm } from "react-hook-form";
 import { useHistory } from 'react-router-dom';
@@ -8,15 +8,23 @@ export default function Login({ setShow }) {
 
     const { register, handleSubmit, errors } = useForm();
     const { loginUser } = useContext(UserContext);
-    const history = useHistory()
+    const [ loginError, setLoginError ] = useState(false);
+    const history = useHistory();
 
     const closeModal = () => {
         setShow(false);
     }
 
     const onSubmit = data => {
-        loginUser(data)
-        closeModal()
+        loginUser(data,
+            () => {
+                setLoginError(false);
+                closeModal();
+            },
+            () => {
+                setLoginError(true);
+            }
+        );
     }
 
     const signup = () => {
@@ -33,6 +41,8 @@ export default function Login({ setShow }) {
         <form onSubmit={handleSubmit(onSubmit)}>
             <h2>Se connecter</h2>
             <div className="separator"></div>
+
+            { loginError ? <p className="red">Veuillez vérifier vos identifiants, ou créer un compte.</p>: <br />}
             <div>
                 <label htmlFor="email">Email </label>
                 <input type="email" className="text-input" name="email" ref={register({ required: true})} required />

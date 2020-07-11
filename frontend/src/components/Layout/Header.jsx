@@ -9,7 +9,8 @@ import Login from '../User/Login';
 
 export default function Header() {
 
-    const { userId, user } = useContext(UserContext);
+
+    const { user, cookie } = useContext(UserContext);
     const [show, setShow] = useState(false);
     const [ navOpen, setNavOpen ] = useState(0);
 
@@ -40,14 +41,17 @@ export default function Header() {
                     <ul className={ navOpen ? 'active' : '' }>
                         <Link to='/wiki' onClick={() => setNavOpen(0)}><p className="bolder">wiKi</p><TiFlash className="nav-icon" /></Link>
 
-                        { user.admin ?
-                            <Link to='/admin'><p className="bolder">admin</p><TiLockClosed className="nav-icon" /></Link>
-                        : null}
+                        {/* { cookie ?
+                            user.admin ?
+                                <Link to='/admin'><p className="bolder">admin</p><TiLockClosed className="nav-icon" /></Link>
+                            : null
+                        : null } */}
 
                         { navOpen ?
                         
-                            userId !== null ?
+                            cookie ?
                                 <Link to='/profile' onClick={() => setNavOpen(0)} ><TiUser className="button-icon" />mon compte</Link>
+
                             :
                                 <>
                                 <Link to='/createaccount' onClick={() => setNavOpen(0)} ><p>créer un compte</p></Link>
@@ -58,10 +62,10 @@ export default function Header() {
 
                             <>
 
-                            { userId !== null ?
-                                <Link to='/profile'><Button color='primary' outlined rounded className='big-button is-small'><TiUser className="button-icon" />mon compte</Button></Link>
+                            { cookie ?
+                                <Link to='/profile'><Button outlined rounded className='big-button is-small is-danger'><TiUser className="button-icon" />mon compte</Button></Link>
                             :
-                                <Button color='danger' outlined rounded className='big-button is-small' onClick={() => setShow(true)}><TiUser className="button-icon" />se connecter</Button>
+                                <Button outlined rounded className='big-button is-small is-danger' onClick={() => setShow(true)}><TiUser className="button-icon" />me connecter</Button>
                             }
                             </>
                         }

@@ -4,47 +4,47 @@ import { UserContext } from '../../context/UserContext';
 import { Link } from 'react-router-dom';
 import Button from 'react-bulma-components/lib/components/button';
 import { config } from '../../Constants';
+import { TiHeartOutline } from 'react-icons/ti';
 
 let HEROKU_URL = config.url.HEROKU_URL;
 
 const MyActions = () => { 
 
-    const { userProfile } = useContext(UserContext);
-    const author = `${userProfile.firstname}/${userProfile.lastname}`
-    const { data, loading, error } = useRequest(`${HEROKU_URL}/api/${author}`);
+    const { user } = useContext(UserContext);
 
-    console.log(data)
+    const authorId = user._id;
+
+    const { data, loading, error } = useRequest(`${HEROKU_URL}/api/author/${authorId}`);
 
     return (
         <div className="light-card">
             <h3> Mes contributions :</h3>
+            <div className="separator"></div>
 
             {loading ?
                 <p>Chargement en cours...</p>
-            : null }
+            : 
 
-            {error ?
-                <h2>Une erreur s'est produite. Le contenu n'est pas accessible.</h2>
-            : null }
+                error ?
+                    <h2>Une erreur s'est produite. Le contenu n'est pas accessible.</h2>
+                : null 
+            }
 
-            {data.map((post) =>
-                <li key={post._id}>
-                    <Link to={`/wikisheet/${post._id}`}>
-                        <span className="regular-list">
-                            <strong>{post.title} </strong>
+                {data.map((post) =>
+                    <li key={post._id}>
+                        <Link to={`/wikisheet/${post._id}`}>
+                            <span className="regular-list">
+                                <strong>{post.title}</strong>
+                            </span>
+                        </Link>
+                        <span className="meta-maj">
+                        ({post.category})
+                        <TiHeartOutline className="meta-like-icon vertical-center" />{post.like} 
                         </span>
-                    </Link>
-                    <Link to ={`/wikiedit/${post._id}`}>
-                        <span className="meta-maj">update</span>
-                    </Link>
-                    { post.like >=1 ? 
-                        <span className="link">
-                            {post.like} { post.like <2 ? ' fan' : ' fans' }
-                        </span>
-                    : null}
-                </li>
-            )}
-            <Link to="/createressource"><Button rounded className="button is-danger"><p>Ajouter une ressource</p></Button></Link>      
+                    </li>
+                )}
+            <br />
+            <Link to="/createressource"><Button rounded className="button is-danger is-small">Ajouter une ressource</Button></Link>      
         </div>
     );
 }

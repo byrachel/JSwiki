@@ -35,23 +35,26 @@ const NewPassword = () => {
             <div className="separator"></div>
             { message ?
                 <div className='center'>
-                    <h2>Votre nouveau mot de passe est enregistré !</h2>
+                    <div className="login-card">
+
+                    <h2>Votre nouveau mot de passe est enregistré </h2>
                     <p>Vous pouvez maintenant vous identifier et partager vos ressources avec les JSwikers.</p>
                     <br />
-                    <div className="login-card">
                         <LoginForm />
                     </div>
                 </div>
             :
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <label htmlFor="email">eMail :</label>
-                    <input type="email" className="text-input" name="email" ref={register({ required: true, pattern : /^\S+@\S+\.\S+$/})} />
-                    {errors.email && <p className="red">Veuillez vérifier votre adresse mail.</p>}   
-                    <label htmlFor="password">Password :</label>
-                    <input type="password" className="text-input" name="password" ref={register({ required: true, minLength: 7 })} />
-                    {errors.password && <p className="red">Votre mot de passe doit contenir au moins 7 caractères.</p>}   
-                    <Button color='danger' rounded className='big-button' type="submit">Nouveau mot de passe</Button>         
-                </form>
+                <div className="login-card center">
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <label htmlFor="email">Saisissez votre eMail :</label>
+                        <input type="email" className="text-input" name="email" ref={register({ required: true, pattern : /^\S+@\S+\.\S+$/})} />
+                        {errors.email && <p className="red">Veuillez vérifier votre adresse mail.</p>}   
+                        <label htmlFor="password">Saisissez votre nouveau mot de passe :</label>
+                        <input type="password" className="text-input" name="password" ref={register({ required: true, minLength: 7 })} />
+                        {errors.password && <p className="red">Votre mot de passe doit contenir au moins 7 caractères.</p>}   
+                        <Button rounded className='big-button is-danger is-small' type="submit">Nouveau mot de passe</Button>         
+                    </form>
+                </div>
             }
         </div>
     );

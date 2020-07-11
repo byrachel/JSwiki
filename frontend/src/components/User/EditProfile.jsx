@@ -3,15 +3,17 @@ import { useForm } from "react-hook-form";
 import { UserContext } from '../../context/UserContext';
 import Button from 'react-bulma-components/lib/components/button';
 import { TiTick } from "react-icons/ti";
+import axios from 'axios';
+import { config } from '../../Constants';
 
+let HEROKU_URL = config.url.HEROKU_URL;
 
 const EditProfile = ({ editMode, setEditMode }) => {
 
     const { register, handleSubmit, errors } = useForm();
-    const { updateUser, userProfile, userId } = useContext(UserContext);
+    const { userProfile, userId } = useContext(UserContext);
 
     const onSubmit = ( data) => {
-        console.log(data)
         const user = {
             _id : userId,
             firstname: data.firstname,
@@ -21,8 +23,9 @@ const EditProfile = ({ editMode, setEditMode }) => {
             github: data.github,
             bio: data.bio
         }
-        // console.log(user);
-        updateUser(userId, user)
+        axios.put(`${HEROKU_URL}/auth/update/${userId}`, user, {withCredentials: true})
+        .then((res) => setEditMode(false))
+        .catch((err) => console.log(err))
     }
 
     return (

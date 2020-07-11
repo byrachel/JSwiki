@@ -11,10 +11,11 @@ const isAdmin = require('../middlewares/isAdmin');
 const stuffCtrl = require('../controllers/stuff');
 
 // Méthode POST pour créer des données via un formulaire
-router.post('/create/', stuffCtrl.createPost);
+router.post('/create/', isLogged.check, stuffCtrl.createPost);
 
 // Methode PUT pour mettre à jour un objet + :id comme paramètre
 router.put('/update/:id', isLogged.check, stuffCtrl.modifyPost);
+router.put('/like/:id', stuffCtrl.addLike);
 
 // Méthode DELETE pour supprimer un objet 
 router.delete('/delete/:id', isAdmin.check, stuffCtrl.deletePost);
@@ -23,6 +24,6 @@ router.delete('/delete/:id', isAdmin.check, stuffCtrl.deletePost);
 router.get('/', stuffCtrl.getAllPosts);
 router.get('/:id', stuffCtrl.getOnePost);
 router.get('/api/:category', stuffCtrl.getPostsByCategory);
-router.get('/:firstname/:lastname', stuffCtrl.getPostsByAuthor);
+router.get('/author/:id', stuffCtrl.getPostsByAuthor);
 
 module.exports = router;

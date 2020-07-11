@@ -4,29 +4,40 @@ import { UserContext } from '../../context/UserContext';
 import { Editor } from '@tinymce/tinymce-react';
 import axios from 'axios';
 import { config } from '../../Constants';
+import { useHistory } from 'react-router-dom';
 let HEROKU_URL = config.url.HEROKU_URL;
 
 function CreateRessource() {
 
-    const { userProfile } = useContext(UserContext);
+    const { myAccount } = useContext(UserContext);
     const [ error, setError ] = useState(null);
     const [ contentRessource, setContentRessource ] = useState('Décrivez votre ressource avec le plus grand soin.')
     const { register, handleSubmit, errors } = useForm();
     const categories = ['Framework', 'Librairie', 'Composant', 'Software', 'Autre'];
     const today = new Date();
 
+    const history = useHistory();
+
     const onSubmit = data => {
         const stuffData = {
-            author: `${userProfile.firstname} ${userProfile.lastname}`,
-            authorId: `${userProfile._id}`,
+            author: `${myAccount.firstname} ${myAccount.lastname}`,
+            authorId: `${myAccount._id}`,
             date: today,
+            maj: false,
             content: contentRessource,
             ...data
         }
         axios.post(`${HEROKU_URL}/api/create`, stuffData) 
-        .then((res) => {console.log(res.data)})
-        .catch((err) => {setError(err)})
+        .then((res) => {
+            setError(false);
+            redirect(res.data._id);
+        })
+        .catch((err) => setError(err))
     };
+
+    const redirect = id => {
+        history.push(`/wikisheet/${id}`)
+    }
 
     const handleEditorChange = (content, editor) => {
         setContentRessource(content)
@@ -44,7 +55,7 @@ function CreateRessource() {
         <br />
         <form onSubmit={handleSubmit(onSubmit)} >
 
-            { error ? <p>Une erreur est survenue. Le contenu n'a pu être enregistré.</p> : null}
+            { error ? <p classname="red">Une erreur est survenue. Le contenu n'a pu être enregistré.</p> : null}
 
             <div className="form-item">
                 <label htmlFor="category">
@@ -62,7 +73,7 @@ function CreateRessource() {
 
             <div className="form-item">
                 <label htmlFor="title">
-                    <strong>Titre</strong> (nom de la ressource) :
+                    <strong>Titre</strong> (nom de la ressource)* :
                     <input type="text" name="title" ref={register({ required: true, maxLength: 30 })}/>
                     <p className="error">{errors.title && "Le nom ne peut dépasser 30 caractères."}</p>
                 </label>
@@ -70,7 +81,7 @@ function CreateRessource() {
 
             <div className="form-item">
                 <label htmlFor="resum">
-                    <strong>Résumé</strong> (maximum 100 caractères) :
+                    <strong>Résumé</strong> (maximum 100 caractères)* :
                     <input type="text" name="resum" ref={register({ required: true, maxLength: 100 })} />
                     <p className="error">{errors.resum && "Ce champ est obligatoire."}</p>
                 </label>
@@ -78,10 +89,7 @@ function CreateRessource() {
 
             <div className="form-item">
                 <label htmlFor="content">
-                {/* <TextEditor value={contentRessource} onEditorChange={() => setContentRessource(contentRessource)} /> */}
-                    {/* <strong>Description</strong> (minimum 250 caractères) : */}
-                    {/* <textarea name="content" ref={register({ required: true })} rows="20" cols="10" /> */}
-                    {/* <p className="error">{errors.content && "Ce champ est obligatoire."}</p> */}
+
                     <Editor
                         apiKey='idfcao36zm119d142p5ohd71hczgjurc6wyxdqztp86181mr'
                         cloudChannel='stable'
@@ -98,6 +106,7 @@ function CreateRessource() {
                             'fontsizeselect | bold | italic | link | code | codesample | bullist numlist outdent indent | removeformat | undo redo'
                         }}
                         onEditorChange={handleEditorChange}
+                        required
                     />
 
                 </label>
@@ -105,7 +114,7 @@ function CreateRessource() {
 
             <div className="form-item">
                 <label htmlFor="link">
-                    <strong>Lien</strong> (url complète) :
+                    <strong>Lien</strong> (url complète)* :
                     <input type="text" name="link" ref={register}/>
                     <p className="error">{errors.link && "Ce champ est obligatoire."}</p>
                 </label>

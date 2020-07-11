@@ -9,83 +9,61 @@ export const UserContext = createContext();
 export const UserProvider = ({children}) => {
 
     const [ userId, setUserId ] = useState(null);
-    const [ user, setUser ] = useState([]);
     const [ userProfile, setUserProfile ] = useState([]); // mon compte
-    const [ userAccount, setUserAccount ] = useState([]); // compte d'un autre user
     const [ redirect, setRedirect ] = useState(false);
-    const [ loginError, setLoginError ] = useState(null);
     const [ stuffLikes, setStuffLikes ] = useState(null);
+    const [ myAccount, setMyAccount ] = useState([]);
+    const [ isLogged, setIsLogged ] = useState(false);
+    const [ cookie, setCookie ] = useState(false);
 
-    const logout = () => {
-        axios.get(`${HEROKU_URL}/auth/logout`)
-        .then((res) => {
-            setUserId(null);
-            setUserProfile([]);})
-    }
-
-    const loginUser = (data) => {
+    const loginUser = (data, onSuccess, onResponse) => {
         axios.post(`${HEROKU_URL}/auth/login`, data, {withCredentials: true})
         .then((res) => {
-            setUserId(res.data.user._id)
-            setRedirect(true)})
-        .catch((err) => setLoginError(true))
+            onSuccess();
+            setUserId(res.data.user._id);
+            setIsLogged(res.data.isLogged);
+            setUserProfile(res.data.user);
+            setMyAccount(res.data.user);
+            setCookie(true);
+            localStorage.setItem('user', JSON.stringify(res.data.user));
+            setRedirect(true);
+        })
+        .catch((err) => {
+            onResponse();
+        })
     }
 
-    const getUser = () => {
-        axios.get(`${HEROKU_URL}/auth/myaccount`, {withCredentials: true})
-        .then((res) => {
-            setUser(res.data)
-            setUserProfile(res.data)
-        })
-        .catch((err) => console.log(err))
-    }
+    const user = JSON.parse(localStorage.getItem('user'));
 
     useEffect(() => {
-        getUser();
-    }, [userId]);
-
-    const displayOneUser = id => {
-        axios.get(`${HEROKU_URL}/auth/user/${id}`, {withCredentials: true})
-        .then((res) => {
-            console.log(res.data)
-            setUserAccount(res.data)
-        })
-        .catch((err) => console.log(err))
-    }
-
-    const updateUser = (id, data) => {
-        axios.put(`${HEROKU_URL}/auth/update/${id}`, data, {withCredentials: true})
-        .then((res) => {
-            console.log(res.data)
-        })
-        .catch((err) => console.log(err))
-    }
+        if(cookie) {
+            const user = JSON.parse(localStorage.getItem('user'));
+            setMyAccount(user)
+        }
+    }, [cookie]);
 
     const addLike = (id, like) => {
         const newLike = {
             like: like +1
         }
-        axios.put(`${HEROKU_URL}/api/update/${id}`, newLike)
-        .then((res) => setStuffLikes(+1))
+        axios.put(`${HEROKU_URL}/api/like/${id}`, newLike)
+        .then((res) => setStuffLikes(stuffLikes +1))
         .catch((err) => console.log(err))
     }
-
-
 
     return(
         <UserContext.Provider value={{
             userId,
             userProfile,
-            userAccount,
             addLike,
             stuffLikes,
-            getUser,
+            setStuffLikes,
             loginUser,
-            logout,
-            updateUser,
             redirect,
-            loginError,
-            displayOneUser,
+            myAccount,
+            isLogged,
+            cookie,
+            setCookie,
             user
             }}>
             {children}

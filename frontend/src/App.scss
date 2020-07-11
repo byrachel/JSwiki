@@ -270,7 +270,7 @@ ul {
 
 .light-card {
   margin: 2rem 1rem;
-
+  max-width: 1200px;
 }
 
 .heading-ressource {
@@ -344,6 +344,16 @@ ul {
 
   }
 
+}
+
+.centered-container {
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+.small-like {
+  margin: 0 .5rem ;
+  vertical-align: middle;
 }
 
 .category-nav-icon {

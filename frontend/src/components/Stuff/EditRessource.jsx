@@ -12,11 +12,11 @@ function EditRessource(props) {
 
     const id = props.value;
 
-    const [ contentRessource, setContentRessource ] = useState('Décrivez votre ressource avec le plus grand soin.')
     const [ errorEdit, setErrorEdit ] = useState(null);
     const { data, loading, error } = useRequest(`${HEROKU_URL}/api/${id}`);
+    const [ contentRessource, setContentRessource ] = useState(data.content)
 
-    const { userProfile } = useContext(UserContext);
+    const { myAccount } = useContext(UserContext);
     const today = new Date();
     const history = useHistory();
 
@@ -25,25 +25,21 @@ function EditRessource(props) {
 
     const onSubmit = data => {
         const stuffData = {
-            majAuthor : `${userProfile.firstname} ${userProfile.lastname}`,
+            majAuthor : `${myAccount.firstname} ${myAccount.lastname}`,
             majDate : today,
+            maj: true,
             content: contentRessource,
             ...data
         }
-    //     editStuff(id, stuffData,
-    //     () => history.push(`/wikisheet/${id}`),
-    //     (err) => { setErrorEdit("Une erreur s'est produite.")}
-    //   );
-
-        // const editStuff = (id, stuffData) => {
             axios.put(`${HEROKU_URL}/api/update/${id}`, stuffData, {withCredentials:true}) 
             .then((res) => history.push(`/wikisheet/${id}`))
             .catch((err) => setErrorEdit("Une erreur s'est produite."))
-        // }        
     };
 
     const handleEditorChange = (content, editor) => {
-        setContentRessource(content)
+        if(content != contentRessource) {
+            setContentRessource(content)
+        }    
     }
 
   return (

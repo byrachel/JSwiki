@@ -29,6 +29,13 @@ exports.modifyPost = (req, res, next) => {
     .catch(error => res.status(400).json({ error }));
 }
 
+// Logique de la route PUT pour mettre à jour un objet + :id comme paramètre
+exports.addLike= (req, res, next) => {
+  Post.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
+    .then(() => res.status(201).json({ message: 'Objet modifié !'}))
+    .catch(error => res.status(400).json({ error }));
+}
+
 // Logique de la route DELETE pour supprimer un objet + :id comme paramètre
 exports.deletePost = (req, res, next) => {
   Post.deleteOne({ _id: req.params.id })
@@ -60,9 +67,9 @@ exports.getPostsByCategory = (req, res, next) => {
 
 // Posts par auteur
 exports.getPostsByAuthor = (req, res, next) => {
-  let author = `${req.params.firstname} ${req.params.lastname}`
-  console.log(req.params)
-  Post.find({ author })
+  console.log('test' + req.params.id)
+  let authorId = req.params.id;
+  Post.find({ authorId })
     .then(things => res.status(200).json(things))
     .catch(error => res.status(400).json({ error }));
 }

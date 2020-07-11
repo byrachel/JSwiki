@@ -10,14 +10,11 @@ import { UserContext } from '../../context/UserContext';
 let HEROKU_URL = config.url.HEROKU_URL;
 
 export default function Ressources() {
+
     const { data, loading, error } = useRequest(`${HEROKU_URL}/api/`);
     const [ search, setSearch ] = useState('');
     const [ filteredData, setFilteredData ] = useState(data);
-    const { addLike, userId } = useContext(UserContext);
-
-    const handleLike = (id, like) => {
-        addLike(id, like)
-    }
+    const { userId } = useContext(UserContext);
 
     const setCategoryColor = (category) => {
         switch (category) {
@@ -59,7 +56,7 @@ export default function Ressources() {
                     <input type="text" name="search" className="search-bar-border" onChange={(e) => setSearch(e.target.value)} value={search} placeholder="Recherche..." />
                 </div>
 
-                {filteredData.map(d => 
+                {filteredData.reverse().map(d => 
                 <li key={d._id}>
                     <div className="card">
                         <div className="right">
@@ -82,7 +79,7 @@ export default function Ressources() {
                         <div className="right">
                             <Link to={`/wikisheet/${d._id}`}><Button rounded outlined className="meta-button is-danger is-small">Lire la fiche</Button></Link>
                         </div>
-                        <p className="meta"><TiHeartFullOutline className="like-icon vertical-center" onClick={() => handleLike(d._id, d.like)} />{d.like} { d.like <2 ? 'fan' : 'fans' }</p>
+                        <Link to={`/wikisheet/${d._id}`}><p className="meta"><TiHeartFullOutline className="like-icon vertical-center" />{d.like} { d.like <2 ? 'fan' : 'fans' }</p></Link>
 
                     </div>
                 </li>)}
