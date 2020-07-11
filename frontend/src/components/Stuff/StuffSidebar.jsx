@@ -32,7 +32,7 @@ const StuffSidebar = () => {
             <h3>Derniers ajouts :</h3>
             <div className="separator"></div>
             <ul>
-                { data.slice(Math.max(data.length - 5, 0)).map((stuff) =>
+                { data.slice(Math.max(data.length - 5, 0)).reverse().map((stuff) =>
                 <li key={stuff._id}>
                     <Link to={`/wikisheet/${stuff._id}`}>
                         <TiFlashOutline className="meta-icon vertical-center" /> 

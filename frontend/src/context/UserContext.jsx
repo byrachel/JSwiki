@@ -12,21 +12,9 @@ export const UserProvider = ({children}) => {
     const [ user, setUser ] = useState([]);
     const [ userProfile, setUserProfile ] = useState([]); // mon compte
     const [ userAccount, setUserAccount ] = useState([]); // compte d'un autre user
-    const [ newUser, setNewUser ] = useState(false);
-    const [ error, setError ] = useState(false);
     const [ redirect, setRedirect ] = useState(false);
     const [ loginError, setLoginError ] = useState(null);
     const [ stuffLikes, setStuffLikes ] = useState(null);
-
-
-    const createUser = (data) => {
-        const userData = {
-            user: data
-        }
-        axios.post(`${HEROKU_URL}/auth/signup`, userData, {withCredentials: true}) 
-        .then((res) => {setNewUser(true)})
-        .catch((err) => {setError(true)})
-    }
 
     const logout = () => {
         axios.get(`${HEROKU_URL}/auth/logout`)
@@ -92,14 +80,11 @@ export const UserProvider = ({children}) => {
             addLike,
             stuffLikes,
             getUser,
-            createUser,
             loginUser,
             logout,
             updateUser,
             redirect,
             loginError,
-            error,
-            newUser,
             displayOneUser,
             user
             }}>

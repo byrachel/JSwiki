@@ -91,18 +91,10 @@ function EditRessource(props) {
                     </label>
                 </div>
 
-                {/* <div className="form-item">
-                    <label htmlFor="content">
-                        <strong>Description</strong> (minimum 250 caractères) :
-                        <textarea name="content" ref={register({ required: true, minLength: 250 })} rows="20" cols="10" defaultValue={stuffDetails.content} />
-                        <p className="error">{errors.content && "Ce champ est obligatoire."}</p>
-                    </label>
-                </div> */}
-
                 <Editor
                     apiKey='idfcao36zm119d142p5ohd71hczgjurc6wyxdqztp86181mr'
                     cloudChannel='stable'
-                    value={data.content}
+                    initialValue={data.content}
                     init={{
                     height: 500,
                     menubar: false,

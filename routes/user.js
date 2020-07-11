@@ -116,13 +116,15 @@ router.post('/forgotPassword', function(req, res) {
         + `${HEROKU_URL}/reset/${token} \n\n'`
         + 'Attention : ce lien est fonctionnel 20 minutes.'
     };
-    transporter.sendMail(mailOptions)
-    .then((res) => {
-        res.status(200).json({mailSent:true});
-    })
-    .catch((error) => {
-        console.error(error);
-        res.status(400).json({mailSent:false});
+    transporter.sendMail(mailOptions, (error, response) => {
+        if(error){
+            console.error(error);
+            res.status(400).json({mailSent:false});
+        }
+        else{
+            console.log(response);
+            res.status(200).json({mailSent:true});
+        }
     })
     
   });

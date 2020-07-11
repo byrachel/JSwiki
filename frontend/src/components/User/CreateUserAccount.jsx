@@ -1,43 +1,54 @@
-import React, {useContext} from 'react';
-import { UserContext } from '../../context/UserContext';
+import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { TiFlash } from "react-icons/ti";
-
+import axios from 'axios';
 import Button from 'react-bulma-components/lib/components/button';
+import { config } from '../../Constants';
+
+let HEROKU_URL = config.url.HEROKU_URL;
 
 export default function CreateUserAccount() {
 
-    const { createUser, newUser, error } = useContext(UserContext);
     const { register, handleSubmit, errors } = useForm();
+    const [ error, setError ] = useState(false);
+    const [ newUser, setNewUser ] = useState(false);
 
-    const onSubmit = data => {
+    const onSubmit = (data, e)=> {
+        e.target.reset();
         const userData = {
-            email: data.email,
-            password: data.password,
-            firstname: data.firstname,
-            lastname: data.lastname,
-            website: data.website,
-            github: data.github,
-            bio: null
+            user : {
+                email: data.email,
+                password: data.password,
+                firstname: data.firstname,
+                lastname: data.lastname,
+                website: data.website,
+                github: data.github,
+                bio: null
+            }
         }
-        createUser(userData);
+        axios.post(`${HEROKU_URL}/auth/signup`, userData, {withCredentials: true}) 
+        .then((res) => {
+            setError(false);
+            setNewUser(true);
+        })
+        .catch((err) => setError(true))
     }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="light-card">
 
-            <h3>> Créer un compte </h3>
+            <h3>Créer un compte </h3>
             <div className="separator"></div>
             <br />
 
             { newUser ?
                 <div>
-                    <h2>Merci de votre inscription</h2>
-                    <p>Vous pouvez maintenant vous connecter et partager vos ressources avec la communauté des JSwikers !</p>
+                    <h2><strong>Merci de votre inscription !</strong></h2>
+                    <p className="red">Vous pouvez maintenant vous connecter et partager vos ressources avec la communauté des JSwikers.</p>
                     <br />
                 </div>
             
-            : <br />}
+            : null }
 
             { error ? <p><strong>Le compte n'a pas été créé. Veuillez vérifier vos données ou essayer ultérieurement. <br /></strong></p> : null}
 
