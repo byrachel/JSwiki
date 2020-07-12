@@ -88,7 +88,9 @@ export default function RessourcesByCategory(props) {
                                         <Link to={`/wikisheet/${d._id}`}><Button rounded outlined className="meta-button is-danger is-small">Lire la fiche</Button></Link>
                                     </div>
                                 :
-                                    <Link to={`/wikisheet/${d._id}`}><Button rounded outlined className="meta-button is-danger is-small">Lire la fiche</Button></Link>
+                                    <div className="right">
+                                        <Link to={`/wikisheet/${d._id}`}><Button rounded outlined className="meta-button is-danger is-small">Lire la fiche</Button></Link>
+                                    </div>
                                 }
 
                             </div>
