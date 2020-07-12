@@ -78,7 +78,7 @@ export default function Header() {
 
             <LoginModal show={show} setShow={setShow} />
 
-            </div>
+        </div>
 
 
     )

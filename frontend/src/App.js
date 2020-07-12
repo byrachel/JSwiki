@@ -25,6 +25,8 @@ import MyAccount_CreateAccount from './pages/MyAccount_CreateAccount';
 import UserProfile from './pages/UserProfile';
 import PasswordReset from './components/User/PasswordReset';
 import NewPassword from './components/User/NewPassword';
+import MentionsLegales from './pages/MentionsLegales';
+import Footer from 'components/Layout/FooterMentions';
 
 function App() {
 
@@ -49,10 +51,11 @@ function App() {
               <Route exact path='/forgotpassword' component={PasswordReset} />
               <Route exact path='/reset/:token' component={NewPassword} />
 
+              <Route exact path='/mentionslegales' component={MentionsLegales} />
               <Route exact path='/admin' component={HandleRessources} />
               {/* <Route component={Error} />  */}
             </Switch>
-
+            <Footer />
           </Container>
         </BrowserRouter>
     </UserProvider>
