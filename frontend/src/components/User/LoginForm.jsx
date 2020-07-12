@@ -24,23 +24,28 @@ export default function LoginForm() {
     }, [userId]);
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            { loginError ? <p className="error">Veuillez vérifier vos identifiants.</p> : null }
-            <div>
-                <label htmlFor="email">Email </label>
-                <input type="email" className="text-input" name="email" ref={register({ required: true})} required />
-                {errors.email && <span>Champ obligatoire.</span>}
-            </div>
-            <div>
-                <label htmlFor="password">Mot de passe</label>
-                <input type="password" className="text-input" name="password" ref={register({ required: true})} />
-                {errors.password && <span>Champ obligatoire.</span>}
-            </div>
-            <br />
-            <div className="center">
-                <Button color='danger' rounded className='big-button' type="submit">Me connecter</Button>
-            </div>
-            <br />
-        </form>
+        <div className="login-container">
+            <h3 className="center"><strong>Vous avez déjà un compte ?</strong></h3>
+            <img src="/images/wiki-javascript.png" alt="Développeur web" className="illustration" />
+
+            <form onSubmit={handleSubmit(onSubmit)}>
+                { loginError ? <p className="error">Veuillez vérifier vos identifiants.</p> : null }
+                <div>
+                    <label htmlFor="email">Email </label>
+                    <input type="email" className="text-input" name="email" ref={register({ required: true})} required />
+                    {errors.email && <span>Champ obligatoire.</span>}
+                </div>
+                <div>
+                    <label htmlFor="password">Mot de passe</label>
+                    <input type="password" className="text-input" name="password" ref={register({ required: true})} />
+                    {errors.password && <span>Champ obligatoire.</span>}
+                </div>
+                <br />
+                <div className="center">
+                    <Button color='danger' rounded className='big-button' type="submit">Me connecter</Button>
+                </div>
+                <br />
+            </form>
+        </div>
     )
 }

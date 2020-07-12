@@ -13,13 +13,7 @@ export default function MyAccount_CreateAccount() {
                     <CreateUserAccount />
                 </Columns.Column>
                 <Columns.Column size={4}>
-                    <div className="light-card">
-                        <h3>> Vous avez déjà un compte ?</h3>
-                        <div className="separator"></div>
-                        <p><strong>Connectez-vous :</strong></p>
-                        <br />
-                        <LoginForm />
-                    </div>
+                    <LoginForm />
                 </Columns.Column>
             </Columns>
 

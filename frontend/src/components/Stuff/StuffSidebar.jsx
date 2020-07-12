@@ -24,13 +24,13 @@ const StuffSidebar = () => {
         <div>
             <img src="/images/developpeur-javascript.png" alt="Développeur web" className="illustration" />
 
-            <h3>Recherche par catégorie</h3>
-            <div className="separator"></div>
+            <h3 className="center"><strong>Recherche par catégorie</strong></h3>
+            <br />
             <CategoriesList />
 
+            <div className="login-container">
+            <h3 className="center"><strong>Derniers ajouts</strong></h3>
             <br />
-            <h3>Derniers ajouts :</h3>
-            <div className="separator"></div>
             <ul>
                 { data.slice(Math.max(data.length - 5, 0)).reverse().map((stuff) =>
                 <li key={stuff._id}>
@@ -44,14 +44,8 @@ const StuffSidebar = () => {
                     </span>
                 </li>)}
             </ul>
-            <br />
-            <div className="center">
-                { userId != null ?
-                <Link to="/createressource"><Button rounded className="button is-danger is-small">Ajouter une ressource</Button></Link>
-                :
-                <Link to="/createaccount"><Button rounded className="button is-danger is-small">Ajouter une ressource</Button></Link>
-                }
             </div>
+
         </div>
     );
 }

@@ -43,7 +43,7 @@ const RessourceDetails = (props) => {
             case 'Composant':
                 return 'is-dark'
             case 'Autre':
-                return 'is-info'
+                return 'is-warning'
             default:
                 return 'is-light'
         }

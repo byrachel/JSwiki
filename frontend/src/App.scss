@@ -166,6 +166,17 @@ label {
   }
 }
 
+.login-container {
+  background-color: #e8eefd;
+  padding: 1rem 2rem;
+  border-radius: 7px;
+  margin-top: 1.5rem;
+
+  .illustration {
+    padding: 0;
+  }
+}
+
 .blocs {
   margin-top: 3rem;
   border: solid 1px $red;
