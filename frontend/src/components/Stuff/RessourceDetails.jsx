@@ -9,6 +9,7 @@ import Login from '../User/Login';
 import useRequest from '../../hooks/useRequest';
 import Tag from 'react-bulma-components/lib/components/tag';
 import { config } from '../../Constants';
+import SocialMedia from './SocialMedia';
 let HEROKU_URL = config.url.HEROKU_URL;
 
 
@@ -75,7 +76,7 @@ const RessourceDetails = (props) => {
                 <div className="card-details">
 
                     <div className="right">
-                        <Tag className={setCategoryColor(data.category)}>{data.category}</Tag>
+                        <Link to={`/wiki/${data.category}`}><Tag className={setCategoryColor(data.category)}>{data.category}</Tag></Link>
                     </div>
                     <h2 className="heading-ressource">{data.title}</h2>
                     <div className="separator"></div>
@@ -95,9 +96,11 @@ const RessourceDetails = (props) => {
                     :
                         <Button rounded className="button is-danger right is-small" outlined onClick={() => setShow(true)} >Mettre à jour</Button>
                     }
-                    <div className="like-container">
-                        <TiHeartFullOutline className="like-icon vertical-center" onClick={() => handleLike(data._id, data.like)} />
-                        {likes} { likes <2 ? 'fan' : 'fans' }
+                    <div className="sharebutton">
+                        <SocialMedia shareUrl={`https://jswikitech.herokuapp.com/wikisheet/${id}`} name={data.title} summary={data.resum} />
+                        <span className="like-container">
+                            <TiHeartFullOutline className="like-icon vertical-center" onClick={() => handleLike(data._id, data.like)} />{likes}
+                        </span>
                     </div>
 
                     <br />

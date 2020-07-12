@@ -19,7 +19,7 @@ export default function RessourcesByCategory(props) {
     const [ search, setSearch ] = useState('');
     const [ filteredData, setFilteredData ] = useState(data);
 
-    const { userId, addLike } = useContext(UserContext);
+    const { isLogged, addLike } = useContext(UserContext);
 
     const handleLike = (id, like) => {
         addLike(id, like)
@@ -53,7 +53,7 @@ export default function RessourcesByCategory(props) {
         <div className="container">
             <div className="light-card">
                 <div className="right">
-                    { userId != null ?
+                    { isLogged ?
                     <Link to="/createressource"><Button outlined rounded className="button is-primary is-small">Ajouter une ressource</Button></Link>
                     :
                     <Link to="/createaccount"><Button outlined rounded className="button is-primary is-small">Ajouter une ressource</Button></Link>
@@ -74,26 +74,22 @@ export default function RessourcesByCategory(props) {
                         {filteredData.map(d => 
                         <li key={d._id}>
                             <div className="card">
-                                <div className="right">
-
-                                </div>
                                 <h2>{d.title}</h2>
                                 <div className="separator"></div>
 
                                 <p>{d.resum}</p>
-                                { userId !== null ?
-                                    <Link to ={`/wikiedit/${d._id}`}><Button rounded className="meta-button is-small">Mettre à jour</Button></Link>
-                                    :
-                                    null
-                                }
                                 <br />
 
-                                <div className="right">
+                                <Link to={`/wikisheet/${d._id}`}><TiHeartFullOutline className="like-icon vertical-center" /><span className="meta">{d.like}</span></Link>
 
-                                    <Link to={`/wikisheet/${d._id}`}><Button rounded outlined className="meta-button is-danger is-small">Consulter la fiche</Button></Link>
-
-                                </div>
-                                <p className="vertical-center meta"><TiHeartFullOutline className="like-icon vertical-center" onClick={() => handleLike(d._id, d.like)} />{d.like} { d.like <2 ? 'fan' : 'fans' }</p>
+                                { isLogged ?
+                                    <div className="right">
+                                        <Link to ={`/wikiedit/${d._id}`}><Button rounded className="meta-button is-small margin-right">Mettre à jour</Button></Link>
+                                        <Link to={`/wikisheet/${d._id}`}><Button rounded outlined className="meta-button is-danger is-small">Lire la fiche</Button></Link>
+                                    </div>
+                                :
+                                    <Link to={`/wikisheet/${d._id}`}><Button rounded outlined className="meta-button is-danger is-small">Lire la fiche</Button></Link>
+                                }
 
                             </div>
                         </li>)}
