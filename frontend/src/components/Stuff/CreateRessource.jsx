@@ -123,23 +123,6 @@ function CreateRessource() {
             <input type="submit" className="button is-black is-fullwidth" />
         </form>
 
-        <div className="blocs">
-            <div className="columns is-mobile ">
-                <div className="column red-square">
-                    <h2 className="white right">Attention</h2>
-                </div>
-                <div className="column is-11">
-                    <p>Tel wikipedia, JS(wiki) est ouvert à tout contributeur. Cependant, un minimum de sérieux est nécessaire afin de rendre l'outil pratique et utile pour tous.</p>
-                    <p><strong>Trois recommandations avant de contribuer :</strong> </p>
-                    <ol>
-                        <li><p>Assurez-vous que la ressource n'est pas déjà enregistrée.</p></li>
-                        <li><p>Ne copiez/collez pas un texte issu d'un autre site.</p></li>
-                        <li><p>Rédigez en français tout en veillant à votre grammaire et orthographe.</p></li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-
     </div>
   );
 }
