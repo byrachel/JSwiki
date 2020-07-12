@@ -9,7 +9,7 @@ let HEROKU_URL = config.url.HEROKU_URL;
 
 function CreateRessource() {
 
-    const { myAccount } = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const [ error, setError ] = useState(null);
     const [ contentRessource, setContentRessource ] = useState('Décrivez votre ressource avec le plus grand soin.')
     const { register, handleSubmit, errors } = useForm();
@@ -20,8 +20,8 @@ function CreateRessource() {
 
     const onSubmit = data => {
         const stuffData = {
-            author: `${myAccount.firstname} ${myAccount.lastname}`,
-            authorId: `${myAccount._id}`,
+            author: `${user.firstname} ${user.lastname}`,
+            authorId: `${user._id}`,
             date: today,
             maj: false,
             content: contentRessource,

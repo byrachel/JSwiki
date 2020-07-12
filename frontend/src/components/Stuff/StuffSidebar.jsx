@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import Button from 'react-bulma-components/lib/components/button';
 import CategoriesList from './CategoriesList';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
@@ -11,7 +10,7 @@ let HEROKU_URL = config.url.HEROKU_URL;
 
 const StuffSidebar = () => {
 
-    const { userId, addLike } = useContext(UserContext);
+    const { addLike } = useContext(UserContext);
     const [ update, setUpdate ] = useState(false);
     const { data } = useRequest(`${HEROKU_URL}/api/`);
 

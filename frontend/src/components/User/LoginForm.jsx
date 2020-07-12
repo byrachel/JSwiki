@@ -20,7 +20,8 @@ export default function LoginForm() {
                 history.push('/profile')
             }
         }
-        redirect()      
+        redirect();
+        // eslint-disable-next-line      
     }, [userId]);
 
     return (

@@ -13,10 +13,10 @@ function EditRessource(props) {
     const id = props.value;
 
     const [ errorEdit, setErrorEdit ] = useState(null);
-    const { data, loading, error } = useRequest(`${HEROKU_URL}/api/${id}`);
+    const { data, loading } = useRequest(`${HEROKU_URL}/api/${id}`);
     const [ contentRessource, setContentRessource ] = useState(data.content)
 
-    const { myAccount } = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const today = new Date();
     const history = useHistory();
 
@@ -25,7 +25,7 @@ function EditRessource(props) {
 
     const onSubmit = data => {
         const stuffData = {
-            majAuthor : `${myAccount.firstname} ${myAccount.lastname}`,
+            majAuthor : `${user.firstname} ${user.lastname}`,
             majDate : today,
             maj: true,
             content: contentRessource,
@@ -37,7 +37,7 @@ function EditRessource(props) {
     };
 
     const handleEditorChange = (content, editor) => {
-        if(content != contentRessource) {
+        if(content !== contentRessource) {
             setContentRessource(content)
         }    
     }
@@ -100,8 +100,7 @@ function EditRessource(props) {
                         'insertdatetime media table paste help wordcount'
                     ],
                     toolbar:
-                        'fontsizeselect | bold | italic | link | code | codesample |  \
-                        bullist numlist outdent indent | removeformat | undo redo help'
+                        'fontsizeselect | bold | italic | link | code | codesample | bullist numlist outdent indent | removeformat | undo redo help'
                     }}
                     onEditorChange={handleEditorChange}
                 />

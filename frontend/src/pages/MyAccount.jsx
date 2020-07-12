@@ -1,24 +1,28 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Columns from 'react-bulma-components/lib/components/columns';
 import Profile from '../components/User/Profile';
 import MyActions from '../components/User/MyActions';
-import axios from 'axios';
-import { config } from '../Constants';
-import { useHistory } from 'react-router-dom';
 import Button from 'react-bulma-components/lib/components/button';
-
-let HEROKU_URL = config.url.HEROKU_URL;
+import { UserContext } from '../context/UserContext';
+import { useHistory } from 'react-router-dom';
 
 export default function MyAccount() {
 
+    const { logout } = useContext(UserContext);
+    const [ isLogout, setIsLogout ] = useState(false);
+
     const history = useHistory();
 
-    const logout = () => {
-        axios.get(`${HEROKU_URL}/auth/logout`)
-        .then((res) => {
-            localStorage.clear();
+    useEffect(() => {
+        if(isLogout) {
             history.push('/');
-        })
+        }
+    // eslint-disable-next-line      
+    }, [isLogout]);
+
+    const handleLogout = () => {
+        logout();
+        setIsLogout(true);
     }
 
     return (
@@ -37,7 +41,7 @@ export default function MyAccount() {
                 </Columns.Column>
 
             </Columns>
-            <Button className="is-small" rounded onClick={() => logout()}>Logout</Button>
+            <Button className="is-small" rounded onClick={() => handleLogout()}>Logout</Button>
         </div>
 
     )

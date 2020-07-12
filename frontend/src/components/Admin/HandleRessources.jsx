@@ -13,7 +13,7 @@ let HEROKU_URL = config.url.HEROKU_URL;
 const HandleRessources = () => {
 
     const { data, loading, error } = useRequest(`${HEROKU_URL}/api/`);
-    const { myAccount } = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
     const removeRessource = (id) => {
         axios.delete(`${HEROKU_URL}/api/delete/${id}`, {withCredentials: true})
@@ -54,7 +54,7 @@ const HandleRessources = () => {
     return (
 
         <>
-        { myAccount.admin ?
+        { user.admin ?
             <div className="light-card">
                 <h3>Gérer les ressources</h3>
                 <div className="separator"></div>

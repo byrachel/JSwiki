@@ -11,7 +11,7 @@ let HEROKU_URL = config.url.HEROKU_URL;
 const EditProfile = ({ editMode, setEditMode }) => {
 
     const { register, handleSubmit, errors } = useForm();
-    const { userProfile, userId } = useContext(UserContext);
+    const { user, userId } = useContext(UserContext);
 
     const onSubmit = ( data) => {
         const user = {
@@ -33,23 +33,23 @@ const EditProfile = ({ editMode, setEditMode }) => {
              <form onSubmit={handleSubmit(onSubmit)}>
 
                 <label htmlFor="email">Email </label>
-                <input type="email" name="email" ref={register({required: true })} defaultValue={userProfile.email} />
+                <input type="email" name="email" ref={register({required: true })} defaultValue={user.email} />
                 {errors.email && <span>Champ obligatoire.</span>}
 
                 <label htmlFor="firstname">Prénom</label>
-                <input type="text" name="firstname" ref={register({ required: false })} defaultValue={userProfile.firstname} />
+                <input type="text" name="firstname" ref={register({ required: false })} defaultValue={user.firstname} />
 
                 <label htmlFor="lastname">Nom</label>
-                <input type="text" name="lastname" ref={register({ required: false })} defaultValue={userProfile.lastname} />
+                <input type="text" name="lastname" ref={register({ required: false })} defaultValue={user.lastname} />
 
                 <label htmlFor="bio">Bio</label>
-                <textarea name="bio" ref={register({ required: false })} defaultValue={userProfile.bio} />
+                <textarea name="bio" ref={register({ required: false })} defaultValue={user.bio} />
 
                 <label htmlFor="website">Website</label>
-                <input type="text" name="website" ref={register({ required: false })} defaultValue={userProfile.website} />
+                <input type="text" name="website" ref={register({ required: false })} defaultValue={user.website} />
 
                 <label htmlFor="github">Github</label>
-                <input type="text" name="github" ref={register({ required: false })} defaultValue={userProfile.github} />
+                <input type="text" name="github" ref={register({ required: false })} defaultValue={user.github} />
 
                 <Button rounded onClick={() => setEditMode(false)}>Annuler</Button> <Button type="submit" color='danger' rounded><TiTick className="button-icon" />Mettre à jour</Button>
 

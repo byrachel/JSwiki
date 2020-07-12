@@ -10,11 +10,8 @@ let HEROKU_URL = config.url.HEROKU_URL;
 
 const MyActions = () => { 
 
-    const { user } = useContext(UserContext);
-
-    const authorId = user._id;
-
-    const { data, loading, error } = useRequest(`${HEROKU_URL}/api/author/${authorId}`);
+    const { userId } = useContext(UserContext);
+    const { data, loading, error } = useRequest(`${HEROKU_URL}/api/author/${userId}`);
 
     return (
         <div className="light-card">

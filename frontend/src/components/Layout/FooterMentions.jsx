@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const FooterMentions = () => {
     return (
-        <Footer centered>
+        <Footer>
             <p className="center meta">
             Website réalisé par Rachel Nething - stack MERN - <Link to='/mentionslegales'>Mentions Légales</Link>
             </p>

@@ -10,7 +10,7 @@ import Login from '../User/Login';
 export default function Header() {
 
 
-    const { user, cookie } = useContext(UserContext);
+    const { user, isLogged } = useContext(UserContext);
     const [show, setShow] = useState(false);
     const [ navOpen, setNavOpen ] = useState(0);
 
@@ -41,15 +41,15 @@ export default function Header() {
                     <ul className={ navOpen ? 'active' : '' }>
                         <Link to='/wiki' onClick={() => setNavOpen(0)}><p className="bolder">wiKi</p><TiFlash className="nav-icon" /></Link>
 
-                        {/* { cookie ?
+                        { isLogged ?
                             user.admin ?
                                 <Link to='/admin'><p className="bolder">admin</p><TiLockClosed className="nav-icon" /></Link>
                             : null
-                        : null } */}
+                        : null }
 
                         { navOpen ?
                         
-                            cookie ?
+                            isLogged ?
                                 <Link to='/profile' onClick={() => setNavOpen(0)} ><TiUser className="button-icon" />mon compte</Link>
 
                             :
@@ -62,7 +62,7 @@ export default function Header() {
 
                             <>
 
-                            { cookie ?
+                            { isLogged ?
                                 <Link to='/profile'><Button outlined rounded className='big-button is-small is-danger'><TiUser className="button-icon" />mon compte</Button></Link>
                             :
                                 <Button outlined rounded className='big-button is-small is-danger' onClick={() => setShow(true)}><TiUser className="button-icon" />me connecter</Button>
