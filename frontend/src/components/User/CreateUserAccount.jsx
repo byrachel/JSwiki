@@ -39,6 +39,8 @@ export default function CreateUserAccount() {
 
             <h3>Créer un compte </h3>
             <div className="separator"></div>
+            <p><strong>Faîtes partie des JSwikers !</strong></p>
+            <p>En créant un compte vous pourrez créer des ressources et mettre à jour toutes celles existantes.</p>
             <br />
 
             { newUser ?

@@ -43,6 +43,13 @@ export default function Ressources() {
     return (
         <div className="container">
             <div className="light-card">
+                <div className="right">
+                    { userId != null ?
+                    <Link to="/createressource"><Button outlined rounded className="button is-primary is-small">Ajouter une ressource</Button></Link>
+                    :
+                    <Link to="/createaccount"><Button outlined rounded className="button is-primary is-small">Ajouter une ressource</Button></Link>
+                    }
+                </div>
                 <h3>Annuaire de ressources JavaScript</h3>
             </div>
 
