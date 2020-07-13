@@ -1,6 +1,10 @@
 import React from 'react';
 
 const MentionsLegales = () => {
+
+
+
+
     return (
         <div>
             <p>MENTIONS LEGALES :</p>

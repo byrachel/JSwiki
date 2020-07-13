@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'
+
+import ScrollToTop from './hooks/ScrollToTop';
 
 // Import Librairies
 import Container from 'react-bulma-components/lib/components/container';
@@ -33,30 +33,31 @@ function App() {
   return (
     <UserProvider>
         <BrowserRouter>
-          <ToastContainer />
-          <Container fluid>
+        <ScrollToTop>
+            <Container fluid>
 
-            <Header />
-            <Switch>
-              <Route exact path='/' component={Home} />
-              <Route exact path='/login' component={Login} />
-              <Route exact path='/wiki' component={Wiki} />
-              <Route exact path='/wiki/:category' component={Wiki_ByCategory} />
-              <Route exact path='/wikisheet/:id' component={Wiki_RessourceDetails} />
-              <Route exact path='/wikiedit/:id' component={Wiki_EditRessource} />
-              <Route path="/createressource" component={Wiki_CreateRessource} />
-              <Route path="/profile" component={MyAccount} />
-              <Route path="/useraccount/:id" component={UserProfile} />
-              <Route exact path='/createAccount' component={MyAccount_CreateAccount} />
-              <Route exact path='/forgotpassword' component={PasswordReset} />
-              <Route exact path='/reset/:token' component={NewPassword} />
+              <Header />
+              <Switch>
+                <Route exact path='/' component={Home} />
+                <Route exact path='/login' component={Login} />
+                <Route exact path='/wiki' component={Wiki} />
+                <Route exact path='/wiki/:category' component={Wiki_ByCategory} />
+                <Route exact path='/wikisheet/:id' component={Wiki_RessourceDetails} />
+                <Route exact path='/wikiedit/:id' component={Wiki_EditRessource} />
+                <Route path="/createressource" component={Wiki_CreateRessource} />
+                <Route path="/profile" component={MyAccount} />
+                <Route path="/useraccount/:id" component={UserProfile} />
+                <Route exact path='/createAccount' component={MyAccount_CreateAccount} />
+                <Route exact path='/forgotpassword' component={PasswordReset} />
+                <Route exact path='/reset/:token' component={NewPassword} />
 
-              <Route exact path='/mentionslegales' component={MentionsLegales} />
-              <Route exact path='/admin' component={HandleRessources} />
-              {/* <Route component={Error} />  */}
-            </Switch>
-            <Footer />
-          </Container>
+                <Route exact path='/mentionslegales' component={MentionsLegales} />
+                <Route exact path='/admin' component={HandleRessources} />
+                {/* <Route component={Error} />  */}
+              </Switch>
+              <Footer />
+            </Container>
+          </ScrollToTop>
         </BrowserRouter>
     </UserProvider>
   );
