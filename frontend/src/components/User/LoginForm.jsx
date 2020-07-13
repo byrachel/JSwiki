@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../context/UserContext';
 import { useForm } from "react-hook-form";
 import { useHistory } from 'react-router-dom';
@@ -7,16 +7,24 @@ import Button from 'react-bulma-components/lib/components/button';
 export default function LoginForm() {
 
     const { register, handleSubmit, errors } = useForm();
-    const { loginUser, loginError, userId } = useContext(UserContext);
-    const history = useHistory()
+    const { loginUser, userId } = useContext(UserContext);
+    const history = useHistory();
+    const [ loginError, setLoginError ] = useState(false);
 
     const onSubmit = data => {
-        loginUser(data)
+        loginUser(data,
+            () => {
+                setLoginError(false);
+            },
+            () => {
+                setLoginError(true);
+            }
+        );
     }
 
     useEffect(() => {
         const redirect = () => {
-            if(userId != null) {
+            if(userId !== null) {
                 history.push('/profile')
             }
         }

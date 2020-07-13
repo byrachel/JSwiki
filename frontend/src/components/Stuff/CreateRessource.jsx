@@ -27,12 +27,13 @@ function CreateRessource() {
             content: contentRessource,
             ...data
         }
-        axios.post(`${HEROKU_URL}/api/create`, stuffData) 
+        axios.post(`${HEROKU_URL}/api/create`, stuffData, {withCredentials: true}) 
         .then((res) => {
             setError(false);
             redirect(res.data._id);
         })
-        .catch((err) => setError(err))
+        .catch((err) => {
+            setError(err)})
     };
 
     const redirect = id => {
@@ -55,7 +56,7 @@ function CreateRessource() {
         <br />
         <form onSubmit={handleSubmit(onSubmit)} >
 
-            { error ? <p classname="red">Une erreur est survenue. Le contenu n'a pu être enregistré.</p> : null}
+            { error ? <p className="red">Une erreur est survenue. Le contenu n'a pu être enregistré.</p> : null}
 
             <div className="form-item">
                 <label htmlFor="category">

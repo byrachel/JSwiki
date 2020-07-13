@@ -6,6 +6,7 @@ import Button from 'react-bulma-components/lib/components/button';
 import Tag from 'react-bulma-components/lib/components/tag';
 import { config } from '../../Constants';
 import { UserContext } from '../../context/UserContext';
+import SocialMedia from './SocialMedia';
 
 let HEROKU_URL = config.url.HEROKU_URL;
 
@@ -73,7 +74,6 @@ export default function Ressources() {
                             <p>{d.resum}</p>
                             <br />
 
-                            <Link to={`/wikisheet/${d._id}`}><TiHeartFullOutline className="like-icon vertical-center" /><span className="meta">{d.like}</span></Link>
 
                             { isLogged ?
                                 <div className="right">
@@ -85,6 +85,13 @@ export default function Ressources() {
                                     <Link to={`/wikisheet/${d._id}`}><Button rounded outlined className="meta-button is-danger is-small">Lire la fiche</Button></Link>
                                 </div>
                             }
+
+                            <div className="sharebutton">
+                                <SocialMedia shareUrl={`https://jswikitech.herokuapp.com/wikisheet/${d._id}`} name={d.title} summary={d.resum} />
+                                <span className="like-container">
+                                    <Link to={`/wikisheet/${d._id}`}><TiHeartFullOutline className="like-icon vertical-center" /><span className="meta">{d.like}</span></Link>
+                                </span>
+                            </div>
 
                         </div>
                     </li>)}

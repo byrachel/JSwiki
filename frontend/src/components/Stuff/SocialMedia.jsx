@@ -4,52 +4,46 @@ import {
     FacebookShareButton,
     LinkedinShareButton,
     TwitterShareButton,
-    WhatsappShareButton,
-  } from "react-share";
+} from "react-share";
 
 import {
-    FacebookIcon,
-    LinkedinIcon,
-    TwitterIcon,
-    WhatsappIcon,
-} from "react-share";
+    TiSocialTwitter,
+    TiSocialFacebook,
+    TiSocialLinkedin
+} from 'react-icons/ti';
 
 const SocialMedia = ({ shareUrl, name, summary }) => {
 
-    const title = name + ' | JS(wiki)'
+    const title = name + summary
 
     return (
         <>
             <FacebookShareButton
             url={shareUrl}
             quote={title}
+            hashtag={'JSwiki'}
             className="margin-right"
           >
-            <FacebookIcon size={20} borderRadius={10} />
+            <TiSocialFacebook className="tweet-icon"  />
           </FacebookShareButton>
 
           <TwitterShareButton
+            hashtags={['JavaScript', 'JS', 'JSwiki']}
             url={shareUrl}
             title={title}
             className="margin-right"
           >
-            <TwitterIcon size={20} borderRadius={10} />
+            <TiSocialTwitter className="tweet-icon"   />
           </TwitterShareButton>
 
-          <WhatsappShareButton
+
+          <LinkedinShareButton
+            title={name}
+            summary={summary}
             url={shareUrl}
-            title={title}
-            separator=":: "
-            className="margin-right"
-          >
-            <WhatsappIcon size={20} borderRadius={10} />
-          </WhatsappShareButton>
-
-
-          <LinkedinShareButton url={shareUrl}
             className="margin-right"
             >
-            <LinkedinIcon size={20} borderRadius={10} />
+            <TiSocialLinkedin className="tweet-icon" />
           </LinkedinShareButton>
       
         </>

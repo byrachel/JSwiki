@@ -10,8 +10,9 @@ import useRequest from '../../hooks/useRequest';
 import Tag from 'react-bulma-components/lib/components/tag';
 import { config } from '../../Constants';
 import SocialMedia from './SocialMedia';
-let HEROKU_URL = config.url.HEROKU_URL;
+import { Helmet } from 'react-helmet-async';
 
+let HEROKU_URL = config.url.HEROKU_URL;
 
 const RessourceDetails = (props) => {
 
@@ -65,7 +66,13 @@ const RessourceDetails = (props) => {
     return (
         <div className="container">
             <div className="light-card">
-
+                <div className="right">
+                    { isLogged ?
+                    <Link to="/createressource"><Button outlined rounded className="button is-primary is-small">Ajouter une ressource</Button></Link>
+                    :
+                    <Link to="/createaccount"><Button outlined rounded className="button is-primary is-small">Ajouter une ressource</Button></Link>
+                    }
+                </div>
                 <h3>Wiki - Fiche détaillée</h3>
             </div>
 
@@ -74,7 +81,11 @@ const RessourceDetails = (props) => {
                 error ? <p> Une erreure s'est produite</p> :
 
                 <div className="card-details">
-
+                    <Helmet>
+                        <title>JS(wiki) : Les meilleures ressources JavaScript !</title>
+                        <link rel="canonical" href="https://jswikitech.herokuapp.com/wikisheet/{data._id}" />
+                        <meta name="description" content={data.resum} />
+                    </Helmet>
                     <div className="right">
                         <Link to={`/wiki/${data.category}`}><Tag className={setCategoryColor(data.category)}>{data.category}</Tag></Link>
                     </div>
@@ -90,26 +101,26 @@ const RessourceDetails = (props) => {
 
                     <p className="meta">Lien officiel : <a href={data.link}>{data.link}</a></p>
                     <br />
-
                     { isLogged ?
                         <Link to ={`/wikiedit/${id}`}><Button rounded className="button is-danger right is-small" outlined>Mettre à jour</Button></Link>
                     :
                         <Button rounded className="button is-danger right is-small" outlined onClick={() => setShow(true)} >Mettre à jour</Button>
                     }
                     <div className="sharebutton">
-                        <SocialMedia shareUrl={`https://jswikitech.herokuapp.com/wikisheet/${id}`} name={data.title} summary={data.resum} />
+                        <SocialMedia shareUrl={`https://jswikitech.herokuapp.com/wikisheet/${data._id}`} name={data.title} summary={data.resum} />
                         <span className="like-container">
                             <TiHeartFullOutline className="like-icon vertical-center" onClick={() => handleLike(data._id, data.like)} />{likes}
                         </span>
                     </div>
+                    <div className="author-space">
 
-                    <br />
-                    <div className="footer-card"></div>
+                        <div className="footer-card"></div>
 
                         <p className="meta-info"><TiFlash className="meta-icon vertical-center" /> Créé le {moment(data.date).format('LLLL')} par <Link to={`/useraccount/${data.authorId}`}>{data.author}</Link></p>
                         { data.maj ?
                             <p className="meta-info"><TiFlashOutline className="meta-icon vertical-center" />Mis à jour le {moment(data.majDate).format('LLLL')} par <Link to={`/useraccount/${data.authorId}`}>{data.majAuthor}</Link></p>
                         : null}
+                    </div>
                     <LoginModal show={show} setShow={setShow} />
 
                 </div>

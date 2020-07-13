@@ -1,8 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import CategoriesList from './CategoriesList';
 import { Link } from 'react-router-dom';
-import { UserContext } from '../../context/UserContext';
-import { TiHeartOutline, TiFlashOutline } from 'react-icons/ti';
+import { TiFlashOutline } from 'react-icons/ti';
 import useRequest from '../../hooks/useRequest';
 import { config } from '../../Constants';
 
@@ -10,14 +9,7 @@ let HEROKU_URL = config.url.HEROKU_URL;
 
 const StuffSidebar = () => {
 
-    const { addLike } = useContext(UserContext);
-    const [ update, setUpdate ] = useState(false);
     const { data } = useRequest(`${HEROKU_URL}/api/`);
-
-    const handleLike = (id, like) => {
-        addLike(id, like);
-        setUpdate(!update);
-    }
 
     return (
         <div>
@@ -34,12 +26,11 @@ const StuffSidebar = () => {
                 { data.slice(Math.max(data.length - 5, 0)).reverse().map((stuff) =>
                 <li key={stuff._id}>
                     <Link to={`/wikisheet/${stuff._id}`}>
-                        <TiFlashOutline className="meta-icon vertical-center" /> 
+                        <TiFlashOutline className="meta-icon vertical-center margin-right" /> 
                         <span className="regular-list">{stuff.title}</span>
                     </Link>
                     <span className="meta-maj">
-                        ( {stuff.category} )
-                        <TiHeartOutline className="meta-like-icon vertical-center" onClick={() => handleLike(stuff._id, stuff.like)} />{stuff.like} { stuff.like <2 ? 'fan' : 'fans' }
+                        <Link to={`/wiki/${stuff.category}`}>( {stuff.category} )</Link>
                     </span>
                 </li>)}
             </ul>

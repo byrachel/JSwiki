@@ -9,6 +9,7 @@ import Tag from 'react-bulma-components/lib/components/tag';
 // Category icons
 import { TiHeartFullOutline } from 'react-icons/ti';
 import { UserContext } from '../../context/UserContext';
+import SocialMedia from './SocialMedia';
 
 let HEROKU_URL = config.url.HEROKU_URL;
 
@@ -22,7 +23,7 @@ export default function RessourcesByCategory(props) {
     const { isLogged, addLike } = useContext(UserContext);
 
     const handleLike = (id, like) => {
-        addLike(id, like)
+        addLike(id, like);
     }
 
     useEffect(() => {
@@ -80,8 +81,6 @@ export default function RessourcesByCategory(props) {
                                 <p>{d.resum}</p>
                                 <br />
 
-                                <Link to={`/wikisheet/${d._id}`}><TiHeartFullOutline className="like-icon vertical-center" /><span className="meta">{d.like}</span></Link>
-
                                 { isLogged ?
                                     <div className="right">
                                         <Link to ={`/wikiedit/${d._id}`}><Button rounded className="meta-button is-small margin-right">Mettre à jour</Button></Link>
@@ -92,6 +91,12 @@ export default function RessourcesByCategory(props) {
                                         <Link to={`/wikisheet/${d._id}`}><Button rounded outlined className="meta-button is-danger is-small">Lire la fiche</Button></Link>
                                     </div>
                                 }
+                                
+                                <div className="sharebutton">
+                                    <SocialMedia shareUrl={`https://jswikitech.herokuapp.com/wikisheet/${d._id}`} name={d.title} summary={d.resum} />
+                                    <TiHeartFullOutline className="like-icon vertical-center" onClick={() => handleLike(d._id, d.like)} /><span className="meta">{d.like}</span>
+                                </div>
+
 
                             </div>
                         </li>)}

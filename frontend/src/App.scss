@@ -121,6 +121,16 @@ label {
   margin: 0 .75rem;
 }
 
+.meta-maj a {
+  color: $grey;
+  font-size: .8rem;
+  font-style: italic;
+}
+
+.meta-maj a:hover {
+  color: $red;
+}
+
 .like-container {
   font-size: .8rem;
   margin: 0;
@@ -134,7 +144,7 @@ label {
 }
 
 .like-icon {
-  width: 1.75rem;
+  width: 1.5rem;
   height: auto;
   color: $red;
   cursor: pointer;
@@ -144,6 +154,23 @@ label {
 
 .like-icon:hover {
   color: $blue;
+}
+
+.tweet-icon {
+  width: 1.5rem;
+  height: auto;
+  color: lighten($color: $grey, $amount: 20);
+  cursor: pointer;
+  margin-right: 5px;
+  margin-top: -2px;
+}
+
+.tweet-icon:hover {
+  color: $blue;
+}
+
+.author-space {
+  margin: 2rem 0;
 }
 
 .meta-like-icon {

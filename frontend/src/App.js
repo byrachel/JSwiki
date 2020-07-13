@@ -2,6 +2,7 @@ import React from 'react';
 import './App.scss';
 
 import ScrollToTop from './hooks/ScrollToTop';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 // Import Librairies
 import Container from 'react-bulma-components/lib/components/container';
@@ -32,10 +33,15 @@ function App() {
 
   return (
     <UserProvider>
+      <HelmetProvider>
         <BrowserRouter>
-        <ScrollToTop>
+          <ScrollToTop>
             <Container fluid>
-
+              <Helmet>
+                <title>JS(wiki)</title>
+                <link rel="canonical" href="https://jswikitech.herokuapp.com/" />
+                <meta name="description" content="Développeur JS : Découvre le premier annuaire participatif de ressources JavaScript." />
+              </Helmet>
               <Header />
               <Switch>
                 <Route exact path='/' component={Home} />
@@ -59,6 +65,7 @@ function App() {
             </Container>
           </ScrollToTop>
         </BrowserRouter>
+      </HelmetProvider>
     </UserProvider>
   );
 }

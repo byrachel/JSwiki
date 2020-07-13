@@ -3,6 +3,7 @@ let Post = require('../models/Thing');
 
 // Logique de la route POST : enregistre les données du formulaire addPost
 exports.createPost = (req, res, next) => {
+  console.log(req.body)
   Post.create({
     title: req.body.title,
     category: req.body.category,
@@ -15,8 +16,10 @@ exports.createPost = (req, res, next) => {
     date: req.body.date,
   }, (error, data) => {
     if (error) {
+      console.log(error)
       return next(error)
     } else {
+      console.log(data)
       res.json(data)
     }
   })

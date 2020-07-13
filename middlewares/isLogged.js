@@ -4,6 +4,7 @@ const isLogged = {
             next()
         }
         else {
+            console.log(req.user)
             res.status(401).json({ isLogged: false })
         }
     }

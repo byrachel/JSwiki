@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 // Import du middleware pour protéger les routes le nécessitant
-const isLogged = require('../middlewares/isLoggedIn');
+const isLogged = require('../middlewares/isLogged');
 const isAdmin = require('../middlewares/isAdmin');
 
 // Import du middleware MULTER pour gérer l'upload d'images
