@@ -31,7 +31,7 @@ export default function Home() {
                     </div>
                 <br />
                 <div className="center">
-                    <Link to="/createaccount"><Button outlined rounded className="button is-primary is-small">Créer un compte</Button></Link>
+                    <Link to="/createaccount"><Button rounded className="button is-primary">Créer un compte</Button></Link>
                 </div>
                 <br />
             </div>
