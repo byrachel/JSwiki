@@ -3,27 +3,32 @@ let Post = require('../models/Thing');
 
 // Logique de la route POST : enregistre les données du formulaire addPost
 exports.createPost = (req, res, next) => {
-  console.log(req.body)
-  Post.create({
-    title: req.body.title,
-    category: req.body.category,
-    resum: req.body.resum,
-    content: req.body.content,
-    link: req.body.link,
-    like: 0,
-    author: req.body.author,
-    authorId: req.body.authorId,
-    date: req.body.date,
-  }, (error, data) => {
-    if (error) {
-      console.log(error)
-      return next(error)
-    } else {
-      console.log(data)
-      res.json(data)
+  // Post.exists({ title: req.body.title }, function(err, result) {
+  //   if (err) {
+  //     res.status(403).json({msg : 'already exist'});
+  //   } else {
+      Post.create({
+        title: req.body.title,
+        category: req.body.category,
+        resum: req.body.resum,
+        content: req.body.content,
+        link: req.body.link,
+        like: 0,
+        author: req.body.author,
+        authorId: req.body.authorId,
+        date: req.body.date,
+      }, (error, data) => {
+        if (error) {
+          return next(error)
+        } else {
+          res.json(data)
+        }
+      });
     }
-  })
-}
+//   });
+// }
+
+
 
 // Logique de la route PUT pour mettre à jour un objet + :id comme paramètre
 exports.modifyPost = (req, res, next) => {

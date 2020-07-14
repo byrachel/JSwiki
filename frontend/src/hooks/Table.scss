@@ -11,21 +11,31 @@
         margin: 0 1rem;
     }
 }
+.admin-icon {
+    width: 1.25rem;
+    height: auto;
+    cursor: pointer;
+  }
+  
+  .admin-icon:hover {
+    color: $red;
+  }
 
 .custom-table {
-    color: $grey;
+    color: $black;
     font-family: $family-primary;
+    font-size: .9rem;
     width: 100%;
 
     th {
         padding: 1rem;
-        border-bottom: solid 5px $grey;
+        border-bottom: solid 2px $blue;
         text-align: left;
     }
 
     td {
         padding: .8rem;
-        border-bottom: solid 2px $grey;
+        border-bottom: solid 1px $grey;
     }
     tr:hover {
         background-color: lighten($color: $grey, $amount: 40);

@@ -56,7 +56,13 @@ function CreateRessource() {
         <br />
         <form onSubmit={handleSubmit(onSubmit)} >
 
-            { error ? <p className="red">Une erreur est survenue. Le contenu n'a pu être enregistré.</p> : null}
+            { error ? 
+            <div>
+                <p className="red">Une erreur est survenue. Le contenu n'a pu être enregistré.<br />
+                <span className="bolder">Veuillez vérifier que cette ressource n'est pas déjà enregistrée.</span></p>
+                <div className="separator"></div>
+            </div>
+            : null}
 
             <div className="form-item">
                 <label htmlFor="category">

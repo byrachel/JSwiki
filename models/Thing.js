@@ -1,11 +1,12 @@
 // Import de Mongoose
 const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 
 // Création du schéma de données
 const postSchema = mongoose.Schema({
-  title: { type: String, required: true },
+  title: { type: String, required: true, unique: true, uniqueCaseInsensitive: true },
   category: { type: String, required: true },
-  resum: { type: String, required: true },
+  resum: { type: String, required: true, maxlength: 100  },
   content: { type: String, required: true },
   link: { type: String, required: true },
   like: { type: Number, required: false },
