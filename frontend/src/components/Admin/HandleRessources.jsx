@@ -2,11 +2,15 @@ import React, { useContext, useState, useEffect } from 'react';
 import Table from '../../hooks/Table';
 import '../../hooks/Table.scss';
 import { useDate } from '../../hooks/useDate';
+import Chart from './Chart';
 import { TiBackspace } from 'react-icons/ti';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { config } from '../../Constants';
 import { UserContext } from '../../context/UserContext';
+import Columns from 'react-bulma-components/lib/components/columns';
+import UsersList from './UsersList';
+
 let HEROKU_URL = config.url.HEROKU_URL;
 
 const HandleRessources = () => {
@@ -28,7 +32,7 @@ const HandleRessources = () => {
     const removeRessource = (id) => {
         axios.delete(`${HEROKU_URL}/api/delete/${id}`, {withCredentials: true})
         .then((res) => setUpdate(!update))
-        .then((err) => console.log(err))
+        .catch((err) => console.log(err))
     }
 
     const columns = [
@@ -52,6 +56,10 @@ const HandleRessources = () => {
             Cell: ({ cell: { value } }) => useDate(value)
         },
         {
+            Header: "Catégorie",
+            accessor: "category"
+        },
+        {
             Header: "",
             accessor: "_id",
             Cell: ({ cell: { value } }) => <TiBackspace className="admin-icon" onClick={() => removeRessource(value)} />
@@ -59,20 +67,33 @@ const HandleRessources = () => {
     ]
 
     return (
-
         <>
         { user.admin ?
             <div className="light-card">
                 <h3>Gérer les ressources</h3>
                 <div className="separator"></div>
+                <Columns>
+                    <Columns.Column size={8}>
+                        <h3><strong>Répartition des ressources :</strong></h3>
+                        <br />
+                        <Chart stuff={data} />
+                        <h3>Nombre de ressources : {data.length +1}</h3>
 
-                   { error ? <p>Une erreur est survenue. Aucune donnée n'est disponible pour le moment.</p> : 
-                        <>
-                            <h2>Nombre de ressources : {data.length +1}</h2>
-                            <br />
+                    </Columns.Column>
+                    <Columns.Column size={4}>
+                        <h3><strong>Liste des JSwikers :</strong></h3>
+                        <UsersList />
+                    </Columns.Column>
+                    <Columns.Column size={12}>
+                        { error ?
+                            <p>Une erreur est survenue. Aucune donnée n'est disponible pour le moment.</p>
+                        : 
                             <Table columns={columns} data={data} />
-                        </>
-                }
+                        }
+                    </Columns.Column>
+                </Columns>
+
+
             </div>
         : <p>Vous n'avez pas accès à cette page.</p> }
         </>

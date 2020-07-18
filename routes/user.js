@@ -6,6 +6,7 @@ require('dotenv').config();
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
+const isAdmin = require('../middlewares/isAdmin');
 
 /* Controllers imports */
 const userCtrl = require('../controllers/user');
@@ -31,25 +32,6 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
     }
 });
 
-// var user = {
-//     // Connexion à un compte existant
-//     login: (req, res) => {
-//         if (!req.user) {
-//             res.status(418).json({ isConnected: false })
-//             return;
-//         }
-//         else {
-//             User_model.findOne({ _id: req.user._id }, (error, data) => {
-//                 if (error) {
-//                     res.status(500).end();
-//                     return;
-//                 }
-//                 res.json({ isLogged: true, user: data });
-//             });
-//             // res.status(200).json({ isConnected: true });
-//         }
-//     },
-
 // Update User
 router.put('/update/:id', userCtrl.updateUser);
 
@@ -65,18 +47,23 @@ router.get('/logout', (req, res, next) => {
 });
 
 /*GET all users*/
-// router.get('/all', function(req, res, next) {
-//     User.find({}, (error, result) => {
-//         if(error) {
-//             console.log(error);
-//             res.status(500).json({message: 'Aucune utilisateur trouvé'});
-//             return;
-//         }
+router.get('/users/all', isAdmin.check, function(req, res, next) {
+    User.find({}, (error, result) => {
+        if(error) {
+            res.status(500).json({message: 'Aucune utilisateur trouvé'});
+            return;
+        }
+        res.json(result);
+        console.log(result);
+    })
+});
 
-//         res.json(result);
-//         console.log(result);
-//     })
-// });
+// Logique de la route DELETE pour supprimer un membre
+router.delete('/user/:id', isAdmin.check, function(req, res, next) {
+    User.deleteOne({ _id: req.params.id })
+    .then(() => res.status(200).json({ message: 'Compte supprimé !'}))
+    .catch(error => res.status(400).json({ error }));
+});
 
 // Forget Password
 router.post('/forgotPassword', function(req, res) {
