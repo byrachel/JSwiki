@@ -3,7 +3,7 @@ import Table from '../../hooks/Table';
 import '../../hooks/Table.scss';
 import { useDate } from '../../hooks/useDate';
 import Chart from './Chart';
-import { TiBackspace } from 'react-icons/ti';
+import { TiBackspace, TiLinkOutline } from 'react-icons/ti';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { config } from '../../Constants';
@@ -38,8 +38,7 @@ const HandleRessources = () => {
     const columns = [
         {
             Header: "Nom",
-            accessor: "title",
-            Cell: ({ cell: { value } }) => <Link to={`/wikisheet/${value}`}>{value}</Link> 
+            accessor: "title"
         },
         {
             Header: "Auteur",
@@ -60,9 +59,17 @@ const HandleRessources = () => {
             accessor: "category"
         },
         {
+            Header: "Likes",
+            accessor: "like"
+        },
+        {
             Header: "",
             accessor: "_id",
-            Cell: ({ cell: { value } }) => <TiBackspace className="admin-icon" onClick={() => removeRessource(value)} />
+            Cell: ({ cell: { value } }) => 
+                <>
+                <Link to={`/wikisheet/${value}`}><TiLinkOutline className="admin-icon" /></Link>
+                <TiBackspace className="admin-icon" onClick={() => removeRessource(value)} />
+                </>
         }
     ]
 
