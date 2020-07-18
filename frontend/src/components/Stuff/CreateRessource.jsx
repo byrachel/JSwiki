@@ -58,9 +58,8 @@ function CreateRessource() {
 
             { error ? 
             <div>
-                <p className="red">Une erreur est survenue. Le contenu n'a pu être enregistré.<br />
-                <span className="bolder">Veuillez vérifier que cette ressource n'est pas déjà enregistrée.</span></p>
-                <div className="separator"></div>
+                <p className="red">Attention : Le contenu n'a pu être enregistré.<br />
+                <span className="bolder">Veuillez vérifier que cette ressource n'est pas déjà référencée.</span></p>
             </div>
             : null}
 

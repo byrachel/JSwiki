@@ -36,7 +36,6 @@ UserSchema.methods = {
   // Hook : action qui se réalise en s’accrochant à une autre. Ici le hashage du password a lieu au moment de la création du compte
   UserSchema.pre('save', function(next) {
       if (!this.password) {
-          console.log(this);
           next();
       } else {
           console.log('hash: ' + this.hashPassword(this.password));
@@ -44,23 +43,6 @@ UserSchema.methods = {
           next();
       }
   });
-
-  // UserSchema.pre('save', function(next) {
-  //   var user = this;
-  //   var SALT_FACTOR = 5;
-  
-  //   if (!user.isModified('password')) return next();
-  
-  //   bcrypt.genSalt(SALT_FACTOR, function(err, salt) {
-  //     if (err) return next(err);
-  
-  //     bcrypt.hash(user.password, salt, null, function(err, hash) {
-  //       if (err) return next(err);
-  //       user.password = hash;
-  //       next();
-  //     });
-  //   });
-  // });
 
 // On applique la méthode Unique Validator au schema
 UserSchema.plugin(uniqueValidator);

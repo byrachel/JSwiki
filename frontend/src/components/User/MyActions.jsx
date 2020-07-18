@@ -34,7 +34,7 @@ const MyActions = () => {
                                 <strong>{post.title}</strong>
                             </span>
                         </Link>
-                        <span className="meta-maj">
+                        <span className="meta-maj right">
                         ({post.category})
                         <TiHeartOutline className="meta-like-icon vertical-center" />{post.like} 
                         </span>

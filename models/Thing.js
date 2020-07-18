@@ -19,4 +19,7 @@ const postSchema = mongoose.Schema({
 });
 
 // Export du modèle avec les arguments : (nom du modèle, schéma à utiliser)
+postSchema.plugin(uniqueValidator, {
+  message: 'Error, expected title to be unique.'
+});
 module.exports = mongoose.model('Post', postSchema);
