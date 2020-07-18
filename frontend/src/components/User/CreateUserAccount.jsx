@@ -5,7 +5,6 @@ import axios from 'axios';
 import Button from 'react-bulma-components/lib/components/button';
 import { config } from '../../Constants';
 import Columns from 'react-bulma-components/lib/components/columns';
-import Login from './Login';
 
 let HEROKU_URL = config.url.HEROKU_URL;
 
@@ -14,7 +13,6 @@ export default function CreateUserAccount() {
     const { register, handleSubmit, errors } = useForm();
     const [ error, setError ] = useState(false);
     const [ newUser, setNewUser ] = useState(false);
-    const [ show, setShow ] = useState(false);
 
     const onSubmit = (data, e)=> {
         e.target.reset();
@@ -37,18 +35,6 @@ export default function CreateUserAccount() {
         .catch((err) => setError(true))
     }
 
-    const LoginModal = ({ show, setShow }) => {
-        const content = show && (
-            <div className="overlay">
-                <div className="dialog">
-                    <div className="close-modal right" type="button" onClick={() => setShow(false)}>X</div>
-                    <Login show={show} setShow={setShow} />
-                </div>
-            </div>
-        )
-        return content;
-    }
-
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="light-card">
 
@@ -59,11 +45,9 @@ export default function CreateUserAccount() {
             { newUser ?
                 <div>
                     <h2><strong>Merci de votre inscription</strong></h2>
-                    <p className="red">Vous pouvez maintenant vous connecter et partager vos ressources avec la communauté des JSwikers.</p>
+                    <p className="red">Vous pouvez maintenant <strong>vous connecter</strong> et partager vos ressources avec la communauté des JSwikers.</p>
                     <br />
-                    <div className="center">
-                        <Button outlined rounded className='big-button is-small is-danger' onClick={() => setShow(true)}>me connecter</Button>
-                    </div>
+
                 </div>
             
             : 
@@ -104,9 +88,10 @@ export default function CreateUserAccount() {
                 </Columns>
 
                 <Button color='primary' rounded className='big-button' type="submit"><TiFlash className="button-icon" />Créer un compte</Button>
-                <LoginModal show={show} setShow={setShow} />
             </>
             }
             </form>
+
+
     )
 }

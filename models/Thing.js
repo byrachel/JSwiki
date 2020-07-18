@@ -2,7 +2,6 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
-// Création du schéma de données
 const postSchema = mongoose.Schema({
   title: { type: String, required: true, unique: true, uniqueCaseInsensitive: true },
   category: { type: String, required: true },
@@ -18,7 +17,6 @@ const postSchema = mongoose.Schema({
   majAuthor: { type: String, required: false }
 });
 
-// Export du modèle avec les arguments : (nom du modèle, schéma à utiliser)
 postSchema.plugin(uniqueValidator, {
   message: 'Error, expected title to be unique.'
 });

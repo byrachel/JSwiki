@@ -28,6 +28,7 @@ import PasswordReset from './components/User/PasswordReset';
 import NewPassword from './components/User/NewPassword';
 import MentionsLegales from './pages/MentionsLegales';
 import Footer from 'components/Layout/FooterMentions';
+import NotFound from './pages/NotFound';
 
 function App() {
 
@@ -56,10 +57,9 @@ function App() {
                 <Route exact path='/createAccount' component={MyAccount_CreateAccount} />
                 <Route exact path='/forgotpassword' component={PasswordReset} />
                 <Route exact path='/reset/:token' component={NewPassword} />
-
                 <Route exact path='/mentionslegales' component={MentionsLegales} />
                 <Route exact path='/admin' component={HandleRessources} />
-                {/* <Route component={Error} />  */}
+                <Route path="*" component={NotFound} />
               </Switch>
               <Footer />
             </Container>

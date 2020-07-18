@@ -24,7 +24,6 @@ router.get('/user/:id', userCtrl.userProfile);
 router.post('/login', passport.authenticate('local'), function(req, res) {
     var dataUser = req.user;
     if(req.user) {
-        console.log(dataUser);
         res.json({
             user: dataUser,
             isLogged: true
@@ -54,7 +53,6 @@ router.get('/users/all', isAdmin.check, function(req, res, next) {
             return;
         }
         res.json(result);
-        console.log(result);
     })
 });
 
