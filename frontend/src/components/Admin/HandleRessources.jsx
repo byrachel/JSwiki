@@ -102,7 +102,12 @@ const HandleRessources = () => {
 
 
             </div>
-        : <p>Vous n'avez pas accès à cette page.</p> }
+        : 
+            <div className="light-card center">
+                <h2>Vous n'avez pas accès à cette page.</h2>
+                <p>Veuillez vous connecter en tant qu'administrateur.</p>
+            </div>
+        }
         </>
     );
 }
