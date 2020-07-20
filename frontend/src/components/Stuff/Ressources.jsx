@@ -61,7 +61,7 @@ export default function Ressources() {
                         <input type="text" name="search" className="search-bar-border" onChange={(e) => setSearch(e.target.value)} value={search} placeholder="Recherche..." />
                     </div>
 
-                    {filteredData.reverse().map(d => 
+                    {filteredData.map(d => 
                     <li key={d._id}>
                         <div className="card">
                             <div className="right">
