@@ -91,7 +91,7 @@ function CreateRessource() {
                     <label htmlFor="resum">
                         <strong>Résumé</strong> (maximum 100 caractères)* :
                         <input type="text" name="resum" ref={register({ required: true, maxLength: 100 })} />
-                        <p className="error">{errors.resum && "Ce champ est obligatoire."}</p>
+                        <p className="error">{errors.resum && "Ce champ est obligatoire et ne doit dépasser 100 caractères."}</p>
                     </label>
                 </div>
 
