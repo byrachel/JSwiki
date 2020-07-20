@@ -109,7 +109,7 @@ function EditRessource(props) {
                     <div className="form-item">
                         <label htmlFor="link">
                             <strong>Lien</strong> (url complète) :
-                            <input type="text" name="link" ref={register} defaultValue={data.link}/>
+                            <input type="text" name="link" ref={register({ required: true })} defaultValue={data.link}/>
                             <p className="error">{errors.link && "Ce champ est obligatoire."}</p>
                         </label>
                     </div>
