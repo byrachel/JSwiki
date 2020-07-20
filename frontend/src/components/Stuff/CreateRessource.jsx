@@ -51,10 +51,11 @@ function CreateRessource() {
         <h3>Wiki - Publier une ressource</h3>
         <div className="separator"></div>
         <br />
+        <p className="error">Tel wikipedia, JS(wiki) est ouvert à tout contributeur.</p>
+        <p>Votre ressource sera partagée instantanément, merci de veiller à respecter <a href="https://fr.wikipedia.org/wiki/N%C3%A9tiquette">la netiquette.</a></p>
 
         { isLogged ?
             <>
-            <h4>Publier une nouvelle ressource :</h4>
             <br />
             <form onSubmit={handleSubmit(onSubmit)} >
 

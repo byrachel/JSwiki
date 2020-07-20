@@ -48,7 +48,8 @@ function EditRessource(props) {
 
         <h3> Wiki - Mettre à jour une ressource</h3>
         <div className="separator"></div>
-        <h4>Vous souhaitez modifier la ressource : {data.title}</h4>
+        <p className="error">Attention :</p>
+        <p>Vos modifications seront définitives. Merci de veiller à respecter le partage effectué et <a href="https://fr.wikipedia.org/wiki/N%C3%A9tiquette">la netiquette.</a></p>
         <br />
 
         { isLogged ?
