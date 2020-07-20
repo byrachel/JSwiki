@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { TiFlashOutline, TiHeartOutline } from 'react-icons/ti';
+import { TiFlash, TiHeartOutline } from 'react-icons/ti';
 import { config } from '../../Constants';
 import axios from 'axios';
 
@@ -50,7 +50,7 @@ const Trending = ({ update, setUpdate }) => {
             { popularData.map((stuff) =>
                 <li key={stuff._id}>
                     <Link to={`/wikisheet/${stuff._id}`}>
-                        <TiFlashOutline className="meta-icon vertical-center margin-right" /> 
+                        <TiFlash className="meta-icon vertical-center margin-right" /> 
                         <span className="regular-list">{stuff.title}</span>
                     </Link>
                     <span className="meta-maj">
