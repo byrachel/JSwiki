@@ -35,6 +35,8 @@ export default function Header() {
             <div className="grid-container">
                 <div className="logo">
                     <Link to='/'><p id="logo"><strong>JS</strong>wiki</p></Link>
+                    <p className="header-meta">Site communautaire & participatif</p>
+
                 </div>
                 <nav className="responsive-toolbar">
 
