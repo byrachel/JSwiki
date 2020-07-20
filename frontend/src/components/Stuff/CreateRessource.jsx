@@ -75,7 +75,6 @@ function CreateRessource() {
                             )}
                         </select>
                         <p className="error">{errors.category && "Veuillez sélectionner une catégorie."}</p>
-
                     </label>
                 </div>
 
@@ -123,7 +122,7 @@ function CreateRessource() {
                 <div className="form-item">
                     <label htmlFor="link">
                         <strong>Lien</strong> (url complète)* :
-                        <input type="text" name="link" ref={register}/>
+                        <input type="text" name="link" ref={register({ required: true })}/>
                         <p className="error">{errors.link && "Ce champ est obligatoire."}</p>
                     </label>
                 </div>
