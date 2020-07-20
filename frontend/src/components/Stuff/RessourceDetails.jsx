@@ -89,15 +89,15 @@ const RessourceDetails = (props) => {
                     <div className="right">
                         <Link to={`/wiki/${data.category}`}><Tag className={setCategoryColor(data.category)}>{data.category}</Tag></Link>
                     </div>
-                    <h2 className="heading-ressource">{data.title}</h2>
-                    <div className="separator"></div>
-                    <p className="meta">{data.resum}</p>
+                    <h1 className="heading-ressource">{data.title}</h1>
+                    <h2 className="meta">{data.resum}</h2>
 
                     <br />
 
                     <p dangerouslySetInnerHTML={{ __html: data.content }}></p>
 
                     <br />
+                    <div className="separator"></div>
 
                     <p className="meta">Lien officiel : <a href={data.link}>{data.link}</a></p>
                     <br />
