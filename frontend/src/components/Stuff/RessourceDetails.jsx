@@ -11,6 +11,7 @@ import Tag from 'react-bulma-components/lib/components/tag';
 import { config } from '../../Constants';
 import SocialMedia from './SocialMedia';
 import { Helmet } from 'react-helmet-async';
+import CategoryColor from '../../utils/CategoryColor';
 
 let HEROKU_URL = config.url.HEROKU_URL;
 
@@ -32,23 +33,6 @@ const RessourceDetails = (props) => {
     const handleLike = (id, like) => {
         setLikes(likes +1);
         addLike(id, like);
-    }
-
-    const setCategoryColor = (category) => {
-        switch (category) {
-            case 'Framework':
-                return 'is-danger'
-            case 'Librairie':
-                return 'is-primary'
-            case 'Software':
-                return 'is-light'
-            case 'Composant':
-                return 'is-dark'
-            case 'Autre':
-                return 'is-warning'
-            default:
-                return 'is-light'
-        }
     }
 
     const LoginModal = ({ show, setShow }) => {
@@ -87,7 +71,7 @@ const RessourceDetails = (props) => {
                         <meta name="description" content={data.resum} />
                     </Helmet>
                     <div className="right">
-                        <Link to={`/wiki/${data.category}`}><Tag className={setCategoryColor(data.category)}>{data.category}</Tag></Link>
+                        <Link to={`/wiki/${data.category}`}><Tag className={CategoryColor(data.category)}>{data.category}</Tag></Link>
                     </div>
                     <h1 className="heading-ressource">{data.title}</h1>
                     <h2 className="meta">{data.resum}</h2>

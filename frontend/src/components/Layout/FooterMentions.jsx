@@ -6,7 +6,7 @@ const FooterMentions = () => {
     return (
         <Footer>
             <p className="center meta">
-            Website réalisé par Rachel Nething - stack MERN - <Link to='/mentionslegales'>Mentions Légales</Link>
+            Site réalisé par Rachel Nething - stack MERN - <Link to='/mentionslegales'>Mentions Légales</Link>
             </p>
         </Footer>
     );

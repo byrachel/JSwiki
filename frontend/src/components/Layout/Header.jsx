@@ -9,7 +9,6 @@ import Login from '../User/Login';
 
 export default function Header() {
 
-
     const { user, isLogged } = useContext(UserContext);
     const [show, setShow] = useState(false);
     const [ navOpen, setNavOpen ] = useState(0);
@@ -83,7 +82,6 @@ export default function Header() {
             <LoginModal show={show} setShow={setShow} />
 
         </div>
-
 
     )
 }

@@ -1,15 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import useRequest from '../../hooks/useRequest';
 import '../../App.scss';
-import { Link } from 'react-router-dom';
-import Button from 'react-bulma-components/lib/components/button';
 import { config } from '../../Constants';
-import Tag from 'react-bulma-components/lib/components/tag';
-
-// Category icons
-import { TiHeartFullOutline } from 'react-icons/ti';
 import { UserContext } from '../../context/UserContext';
-import SocialMedia from './SocialMedia';
+import RessourceContainer from './RessourceContainer';
 
 let HEROKU_URL = config.url.HEROKU_URL;
 
@@ -17,91 +11,26 @@ export default function RessourcesByCategory(props) {
 
     const category = props.value;
     const { data, loading, error } = useRequest(`${HEROKU_URL}/api/api/${category}`);
-    const [ search, setSearch ] = useState('');
-    const [ filteredData, setFilteredData ] = useState(data);
 
-    const { isLogged, addLike } = useContext(UserContext);
-
-    const handleLike = (id, like) => {
-        addLike(id, like);
-    }
-
-    useEffect(() => {
-        const searchResult = data.filter((result) => {
-            return result.title.toLowerCase().includes(search.toLowerCase())
-        })
-        setFilteredData(searchResult)
-      }, [search, data]);
-
-    const setCategoryColor = (category) => {
-        switch (category) {
-            case 'Framework':
-                return 'is-danger'
-            case 'Librairie':
-                return 'is-primary'
-            case 'Software':
-                return 'is-light'
-            case 'Composant':
-                return 'is-dark'
-            case 'Autre':
-                return 'is-info'
-            default:
-                return 'is-light'
-        }
-    }
+    const { isLogged } = useContext(UserContext);
 
     return (
         <div className="container">
-            <div className="light-card">
-                <div className="right">
-                    { isLogged ?
-                    <Link to="/createressource"><Button outlined rounded className="button is-primary is-small">Ajouter une ressource</Button></Link>
-                    :
-                    <Link to="/createaccount"><Button outlined rounded className="button is-primary is-small">Ajouter une ressource</Button></Link>
-                    }
-                </div>
 
-                <h3> Catégorie : <Tag className={setCategoryColor(category)}>{category}</Tag></h3>
-                <br />
-            </div>
+            { loading ?
 
-            {loading ? <div>Chargement en cours...</div> :
-                error ? <div>Une erreur s'est produite. Aucun contenu n'est disponible pour le moment.</div> : 
+                error ?
+                    <p>Les données ne sont pas accessibles pour le moment.</p>
 
-                    <ul>
-                        <div className="search-bar">
-                            <input type="text" name="search" className="search-bar-border" onChange={(e) => setSearch(e.target.value)} value={search} placeholder="Recherche..." />
-                        </div>
-                        {filteredData.map(d => 
-                        <li key={d._id}>
-                            <div className="card">
-                                <h2>{d.title}</h2>
-                                <div className="separator"></div>
+                :
 
-                                <p>{d.resum}</p>
-                                <br />
+                    <p><br />Chargement en cours...</p>
+            
+            :
 
-                                { isLogged ?
-                                    <div className="right">
-                                        <Link to ={`/wikiedit/${d._id}`}><Button rounded className="meta-button is-small margin-right">Mettre à jour</Button></Link>
-                                        <Link to={`/wikisheet/${d._id}`}><Button rounded outlined className="meta-button is-danger is-small">Lire la fiche</Button></Link>
-                                    </div>
-                                :
-                                    <div className="right">
-                                        <Link to={`/wikisheet/${d._id}`}><Button rounded outlined className="meta-button is-danger is-small">Lire la fiche</Button></Link>
-                                    </div>
-                                }
-                                
-                                <div className="sharebutton">
-                                    <SocialMedia shareUrl={`https://jswikitech.herokuapp.com/wikisheet/${d._id}`} name={d.title} summary={d.resum} />
-                                    <TiHeartFullOutline className="like-icon vertical-center" onClick={() => handleLike(d._id, d.like)} /><span className="meta">{d.like}</span>
-                                </div>
-
-
-                            </div>
-                        </li>)}
-                    </ul>
+                <RessourceContainer data={data} isLogged={isLogged} />
             }
+
         </div>
     )
 }

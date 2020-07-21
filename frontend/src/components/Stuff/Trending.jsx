@@ -43,7 +43,7 @@ const Trending = ({ update, setUpdate }) => {
     return (
 
         <div className="card">
-            <h3 className="center"><strong>Trending</strong></h3>
+            <h3 className="center"><strong>Top 5</strong></h3>
             <p className="center">___</p>
             <ul className="sidebar-list">
             { error ? <p>Données non accessibles pour le moment.</p> : <>
