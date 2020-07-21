@@ -12,7 +12,7 @@ const UsersList = () => {
 
     useEffect(() => {
         axios.get(`${HEROKU_URL}/auth/users/all`, {withCredentials: true})
-        .then((res) => setUsers(res.data))
+        .then((res) => setUsers(res.data.reverse()))
         .catch((err) => console.log(err))
     }, [update]);
 

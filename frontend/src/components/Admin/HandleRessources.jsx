@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
-import Table from '../../hooks/Table';
-import '../../hooks/Table.scss';
+import Table from '../../utils/Table';
+import '../../utils/Table.scss';
 import { useDate } from '../../hooks/useDate';
 import Chart from './Chart';
 import { TiBackspace, TiLinkOutline } from 'react-icons/ti';
@@ -25,7 +25,7 @@ const HandleRessources = () => {
         axios.get(`${HEROKU_URL}/api/`, {withCredentials: true})
         .then((res) => {
             setError(false)
-            setData(res.data)})
+            setData(res.data.reverse())})
         .catch((err) => setError(true))
       }, [update]);
 
@@ -84,7 +84,7 @@ const HandleRessources = () => {
                         <h3><strong>Répartition des ressources :</strong></h3>
                         <br />
                         <Chart stuff={data} />
-                        <h3>Nombre de ressources : {data.length +1}</h3>
+                        <h3>Nombre de ressources : {data.length -1}</h3>
 
                     </Columns.Column>
                     <Columns.Column size={4}>
