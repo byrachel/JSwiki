@@ -20,7 +20,6 @@ const MentionsLegales = () => {
             Contacter le Webmaster :  <strong><a href="mailto:byrachel@gmail.com">byrachel [@] gmail . com</a></strong><br />
             L’hebergeur du site est : <strong>HEROKU https://www.heroku.com/contact 94105 San Francisco</strong><br />
             <strong><u>CREDIT :</u> </strong> Les mentions légales ont étés générées par<strong> <a href="https://www.generer-mentions-legales.com/generateur-mentions-legales.html">générateur de mentions legales</a></strong><br />
-            Une eau toujours potable avec les <strong><a href="https://www.chamarrel.com/perles-de-ceramique-em-pxl-29_37.html">perles de céramique</a></strong></p>
 
             <p><strong>2. Présentation et principe :</strong></p>
 

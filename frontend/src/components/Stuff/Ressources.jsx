@@ -69,7 +69,7 @@ export default function Ressources() {
 
                             </div>
 
-                            <h2>{d.title}</h2>
+                            <Link to={`/wikisheet/${d._id}`}><h2>{d.title}</h2></Link>
                             <div className="separator"></div>
                             <p>{d.resum}</p>
                             <br />
