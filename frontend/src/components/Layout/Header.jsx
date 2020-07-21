@@ -38,6 +38,7 @@ export default function Header() {
                     <p className="header-meta">Site communautaire & participatif</p>
 
                 </div>
+
                 <nav className="responsive-toolbar">
 
                     <ul className={ navOpen ? 'active' : '' }>
@@ -76,6 +77,7 @@ export default function Header() {
                             <TiThMenu className="image-menu" />
                         </figure>
                     </ul>
+
                 </nav>
 
             <LoginModal show={show} setShow={setShow} />

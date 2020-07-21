@@ -2,7 +2,6 @@
 
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr 2fr;
     grid-template-areas: "logo responsive-toolbar";
     border-bottom: solid 1px lighten($color: $grey, $amount: 40);
 }
@@ -29,7 +28,7 @@
 .header-meta {
     font-size: .8rem;
     color: $grey;
-    margin-top: -.4rem;
+    line-height: normal;
 }
 
 .bolder {
