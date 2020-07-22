@@ -7,6 +7,6 @@ C'est un annuaire de ressources, un espace de veille et d’informations autour 
 
 #### Environnement :
 
-Stack = MERN
-Hébergement : Heroku CI
-Base de données : Mongo Atlas
+- Stack = MERN
+- Hébergement : Heroku CI
+- Base de données : Mongo Atlas
