@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { UserContext } from '../../context/UserContext';
 import Button from 'react-bulma-components/lib/components/button';
@@ -12,6 +12,7 @@ const EditProfile = ({ editMode, setEditMode }) => {
 
     const { register, handleSubmit, errors } = useForm();
     const { user, userId } = useContext(UserContext);
+    const [ updateError, setUpdateError ] = useState(false)
 
     const onSubmit = ( data) => {
         const user = {
@@ -24,13 +25,16 @@ const EditProfile = ({ editMode, setEditMode }) => {
             bio: data.bio
         }
         axios.put(`${HEROKU_URL}/auth/update/${userId}`, user, {withCredentials: true})
-        .then((res) => setEditMode(false))
-        .catch((err) => console.log(err))
+        .then((res) => {
+            setEditMode(false)})
+        .catch((err) => setUpdateError(true))
     }
 
     return (
         <div>
              <form onSubmit={handleSubmit(onSubmit)}>
+
+                { updateError ? <p className="red">Les données n'ont pu être mises à jour !</p> : null }
 
                 <label htmlFor="email">Email </label>
                 <input type="email" name="email" ref={register({required: true })} defaultValue={user.email} />

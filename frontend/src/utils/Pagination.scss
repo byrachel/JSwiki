@@ -1,0 +1,32 @@
+@import '../App.scss';
+
+#pagination-block {
+    text-align: center;
+    margin: 1.5rem 0 0 0;
+}
+
+.pagination li {
+    list-style-type: none;
+    display: inline-block;
+    margin-right: .25rem;
+
+    a {
+        color: $white;
+        background-color: $primary;
+        padding: 10px 20px;
+        text-decoration: none;
+        transition: background-color .3s;
+        border-radius: 7px;
+    }
+
+    a:hover {
+        background-color: $danger;
+    }
+      
+}
+
+.active {
+    background-color: $danger;
+    padding: 10px 20px;
+
+}

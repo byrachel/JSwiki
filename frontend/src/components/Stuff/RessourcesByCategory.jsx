@@ -27,8 +27,8 @@ export default function RessourcesByCategory(props) {
                     <p><br />Chargement en cours...</p>
             
             :
-
                 <RessourceContainer data={data} isLogged={isLogged} />
+
             }
 
         </div>
